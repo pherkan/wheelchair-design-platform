@@ -58,7 +58,7 @@ def handle_rotation_data(handle, value_bytes):
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
 
     if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
-        ser.write('1.'encode())
+        ser.write('1'.encode())
         time.sleep(2)
         ser.write('0'.encode())
         global nudged
