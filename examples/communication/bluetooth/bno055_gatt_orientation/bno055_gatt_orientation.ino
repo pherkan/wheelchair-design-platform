@@ -100,7 +100,7 @@ void setup(void) {
   ble.verbose(true);
 
   // Change the device name to fit its purpose
-  if (! ble.sendCommandCheckOK(F("AT+GAPDEVNAME=Noisy Left Wheel")) ) {
+  if (! ble.sendCommandCheckOK(F("AT+GAPDEVNAME=dance")) ) {
     error(F("Could not set device name."));
   }
 
@@ -130,7 +130,7 @@ void orientation() {
   float quatX = quat.x();
   float quatY = quat.y();
   float quatZ = quat.z();
-  
+
   // Command is sent when \n (\r) or println is called
   // AT+GATTCHAR=CharacteristicID,value
   ble.print( F("AT+GATTCHAR=") );

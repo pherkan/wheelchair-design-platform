@@ -8,8 +8,7 @@ import time                     # To sleep for a few seconds
 load_dotenv()
 
 # Start reading the serial port
-ser = serial.Serial(
-    port = os.environ['SERIAL'],
+ser = serial.Serial(port = os.environ['SERIAL'],
     baudrate = 9600,
     write_timeout = 0)
 
@@ -22,4 +21,10 @@ while True:
     temp = '0'
     print("write 0")
     ser.write(temp.encode())
+    print("Starting to print")
+    ser.write('1'.encode())
+    print("printing 1")
+    time.sleep(5)
+    print("printing 0")
+    ser.write('0'.encode())
     time.sleep(2)
