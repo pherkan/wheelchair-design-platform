@@ -28,7 +28,7 @@ GATT_CHARACTERISTIC_ORIENTATION = "02118733-4455-6677-8899-AABBCCDDEEFF"
 ADDRESS_TYPE = pygatt.BLEAddressType.random
 
 # Recommended number of rotation
-RECOMMENDED_NUM_ROTATION = 10
+RECOMMENDED_NUM_ROTATION = 4
 # Did we already nudged
 nudged = False
 
@@ -69,9 +69,11 @@ def handle_orientation_data(handle, value_bytes):
                    PropertyType.THREE_DIMENSIONS).update_values(orientation_values)
 
     if orientation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
-        ser.write('1')
+        temp = '1'
+        ser.write(temp.encode())
         time.sleep(2)
-        ser.write('0')
+        temp = '0'
+        ser.write(temp.encode())
         global nudged
         nudged = True
 
