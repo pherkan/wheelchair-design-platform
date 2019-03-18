@@ -54,7 +54,7 @@ def handle_rotation_data(handle, value_bytes):
     """
     print("Received data: %s (handle %d)" % (str(value_bytes), handle))
     rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
-    find_or_create("Left Wheel Rotation",
+    find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
 
     if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
