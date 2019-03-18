@@ -218,10 +218,10 @@ void loop(void) {
   if ( !ble.waitForOK() ) {
     error(F("Failed to get response!"));
   }
-  if (global_rotations.forward_rotations == 4) {
+  if (global_rotations.forward_rotations >= 4) {
     global_rotations.forward_rotations = 0;
   }
-  if (global_rotations.reverse_rotations == 4) {
+  if (global_rotations.reverse_rotations >= 4) {
     global_rotations.reverse_rotations = 0;
   }
 
