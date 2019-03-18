@@ -221,6 +221,9 @@ void loop(void) {
   if (global_rotations.forward_rotations == 4) {
     global_rotations.forward_rotations = 0;
   }
+  if (global_rotations.reverse_rotations == 4) {
+    global_rotations.reverse_rotations = 0;
+  }
 
   // Delay before next measurement update
   delay(BNO055_SAMPLERATE_DELAY_MS);
