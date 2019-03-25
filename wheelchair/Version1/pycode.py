@@ -92,7 +92,7 @@ while random_movement == 0:
         ser.write('0'.encode())
         # global nudged
         nudged = True
-    random movement = random.randrange(0,3)
+    random_movement = random.randrange(0,3)
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
 my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
