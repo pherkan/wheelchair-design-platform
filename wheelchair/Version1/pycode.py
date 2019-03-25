@@ -61,14 +61,31 @@ def handle_rotation_data(handle, value_bytes):
         ser.write('1'.encode())
         time.sleep(2)
         ser.write('0'.encode())
-        global nudged
+        # global nudged
         nudged = True
+
 
 def keyboard_interrupt_handler(signal_num):
     """Make sure we close our program properly"""
     print("Exiting...".format(signal_num))
     left_wheel.unsubscribe(GATT_CHARACTERISTIC_ROTATION)
     exit(0)
+
+# Start movements
+random_movement = random.randrange(0,4)
+print(random_movement)
+
+
+# Move forwards
+if random_movement == 1:
+    ser.write(1)
+    time.sleep(2)
+
+# Move backwards
+if random_movement == 2:
+    ser.write(2)
+    time.sleep(2)
+
 
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
