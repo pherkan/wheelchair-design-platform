@@ -75,6 +75,8 @@ def keyboard_interrupt_handler(signal_num):
 # Start movements
 random_movement = random.randrange(0,3)
 print(random_movement)
+rotation_values == [float(x) for x in value_bytes.decode('utf-8').split(",")]
+print(rotation_values)
 
 # Send movement to Arduino to activate actuators
 ser.write(random_movement)
@@ -92,7 +94,7 @@ while random_movement == 0:
         ser.write('0'.encode())
         # global nudged
         nudged = True
-    random_movement = random.randrange(0,3)
+        random_movement = random.randrange(0,3)
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
 my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
