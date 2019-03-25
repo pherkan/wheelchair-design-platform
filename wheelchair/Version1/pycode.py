@@ -70,7 +70,7 @@ def handle_rotation_data(handle, value_bytes):
     # Start movements
     random_movement = random.randrange(0,3)
     print("movement nr: ", random_movement)
-    print "rotation value:", rotation_value
+    print ("rotation value:", rotation_value)
 
     if random_movement == 0:
         print "move BACKWARD"
