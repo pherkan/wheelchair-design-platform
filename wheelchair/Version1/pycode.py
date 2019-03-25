@@ -88,23 +88,26 @@ def handle_rotation_data(handle, value_bytes):
         # print("move BACKWARD")
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-        if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
+        if (first_value[0]-rotation_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             time.sleep(2)
             global nudged
             nudged = True
+            first_value = rotation_values
             random_movement = random.randrange(0,3)
 
     while random_movement == 1:
         # print("move FORWARD")
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-        if rotation_values[1] > RECOMMENDED_NUM_ROTATION and not nudged:
+        if (first_value[1]-rotation_values[1] > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             time.sleep(2)
             global nudged
             nudged = True
+            first_value = rotation_values
             random_movement = random.randrange(0,3)
+
     # End own code
 
 
