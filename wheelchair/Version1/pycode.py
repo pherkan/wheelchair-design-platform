@@ -61,6 +61,33 @@ def handle_rotation_data(handle, value_bytes):
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
 
+    # Own code
+    # Save first orientation value
+    if rotation_values == None:
+        first_value = rotation_values
+        print(first_value)
+
+    # Start movements
+    random_movement = random.randrange(0,3)
+    print("movement nr: "random_movement)
+
+    # Send movement to Arduino to activate actuators
+    ser.write(random_movement)
+    time.sleep(2)
+
+    # Check if user has made the right movement
+    while random_movement == 0:
+        find_or_create("dance",
+                       PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
+        if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
+            ser.write('1'.encode())
+            time.sleep(2)
+            ser.write('0'.encode())
+            # global nudged
+            nudged = True
+            random_movement = random.randrange(0,3)
+    # End own code
+
     if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
         ser.write('1'.encode())
         time.sleep(2)
@@ -75,28 +102,6 @@ def keyboard_interrupt_handler(signal_num):
     left_wheel.unsubscribe(GATT_CHARACTERISTIC_ROTATION)
     exit(0)
 
-# Start movements
-random_movement = random.randrange(0,3)
-print(random_movement)
-start_value = rotation_values
-print(start_value)
-print(rotation_values)
-
-# Send movement to Arduino to activate actuators
-ser.write(random_movement)
-time.sleep(2)
-
-# Check if user has made the right movement
-while random_movement == 0:
-    find_or_create("dance",
-                   PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-    if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
-        ser.write('1'.encode())
-        time.sleep(2)
-        ser.write('0'.encode())
-        # global nudged
-        nudged = True
-        random_movement = random.randrange(0,3)
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
 my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
