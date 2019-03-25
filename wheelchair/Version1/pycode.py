@@ -69,7 +69,7 @@ def handle_rotation_data(handle, value_bytes):
 
     # Start movements
     random_movement = random.randrange(0,3)
-    print("movement nr: "random_movement)
+    print("movement nr: ", random_movement)
 
     # Send movement to Arduino to activate actuators
     ser.write(random_movement)
