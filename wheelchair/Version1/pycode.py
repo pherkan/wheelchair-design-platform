@@ -29,7 +29,7 @@ GATT_CHARACTERISTIC_ROTATION = "02118733-4455-6677-8899-AABBCCDDEEFF"
 ADDRESS_TYPE = pygatt.BLEAddressType.random
 
 # Recommended number of rotation
-RECOMMENDED_NUM_ROTATION = 2
+RECOMMENDED_NUM_ROTATION = 20
 # Did we already nudged
 nudged = False
 
