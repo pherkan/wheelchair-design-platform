@@ -75,8 +75,8 @@ def keyboard_interrupt_handler(signal_num):
 # Start movements
 random_movement = random.randrange(0,3)
 print(random_movement)
-rotation_values == [float(x) for x in value_bytes.decode('utf-8').split(",")]
-print(rotation_values)
+rotation_values_start = [float(x) for x in value_bytes.decode('utf-8').split(",")]
+print(rotation_values_start)
 
 # Send movement to Arduino to activate actuators
 ser.write(random_movement)
@@ -84,7 +84,7 @@ time.sleep(2)
 
 # Check if user has made the right movement
 while random_movement == 0:
-    rotation_values == [float(x) for x in value_bytes.decode('utf-8').split(",")]
+    rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
 
