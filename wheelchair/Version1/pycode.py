@@ -54,24 +54,7 @@ def handle_rotation_data(handle, value_bytes):
     value_bytes -- bytearray, the data returned in the notification
     """
     print("Received data: %s (handle %d)" % (str(value_bytes), handle))
-    rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
-    find_or_create("dance",
-                   PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-
-    if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
-        ser.write('1'.encode())
-        time.sleep(2)
-        ser.write('0'.encode())
-        # global nudged
-        nudged = True
-
-def handle_rotation_data_start(handle, value_bytes):
-    """
-    handle -- integer, characteristic read handle the data was received on
-    value_bytes -- bytearray, the data returned in the notification
-    """
-    print("Received data: %s (handle %d)" % (str(value_bytes), handle))
-    rotation_values_start = [float(x) for x in value_bytes.decode('utf-8').split(",")]
+    global rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
 
@@ -92,7 +75,8 @@ def keyboard_interrupt_handler(signal_num):
 # Start movements
 random_movement = random.randrange(0,3)
 print(random_movement)
-print(rotation_values_start)
+start_value = rotation_values
+print(start_value)
 print(rotation_values)
 
 # Send movement to Arduino to activate actuators
@@ -101,10 +85,8 @@ time.sleep(2)
 
 # Check if user has made the right movement
 while random_movement == 0:
-    rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-
     if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
         ser.write('1'.encode())
         time.sleep(2)
