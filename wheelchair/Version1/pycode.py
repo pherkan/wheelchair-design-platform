@@ -67,6 +67,8 @@ def handle_rotation_data(handle, value_bytes):
 
     # Own code
     # Save first orientation value
+    global is_first_value
+
     if is_first_value == True:
         first_value = rotation_values
         is_first_value = False
