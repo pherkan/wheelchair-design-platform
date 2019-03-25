@@ -38,6 +38,8 @@ void loop() {
     switch (command) {
       //backward
       case '0' :
+        digitalWrite(VIB_PIN, HIGH);
+        delay(1000);
         LED_controller1.setPixelColor( 0, 0xFF0000);
         LED_controller2.setPixelColor( 0, 0xFF0000);
         LED_controller1.show();
@@ -45,6 +47,8 @@ void loop() {
         break;
       //forward
       case '1' :
+        digitalWrite(VIB_PIN, HIGH);
+        delay(1000);
         LED_controller1.setPixelColor( 0, 0x008000);
         LED_controller2.setPixelColor( 0, 0x008000);
         LED_controller1.show();
@@ -52,6 +56,8 @@ void loop() {
         break;
       //right
       case '2' :
+        digitalWrite(VIB_PIN, HIGH);
+        delay(1000);
         LED_controller1.setPixelColor( 0, 0xFF0000);
         LED_controller2.setPixelColor( 0, 0x008000);
         LED_controller1.show();
@@ -59,18 +65,21 @@ void loop() {
         break;
       //left
       case '3' :
+        digitalWrite(VIB_PIN, HIGH);
+        delay(1000);
         LED_controller1.setPixelColor( 0, 0x008000);
         LED_controller2.setPixelColor( 0, 0xFF0000);
         LED_controller1.show();
         LED_controller2.show();
         break;
       default:
+//        digitalWrite(VIB_PIN, LOW);
+//        delay(1000);
         LED_controller1.setPixelColor( 0, 0xFFFFFF);
         LED_controller2.setPixelColor( 0, 0xFFFFFF);
         LED_controller1.show();
         LED_controller2.show();
-        
       }
-    
     }
 }
+
