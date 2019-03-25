@@ -29,7 +29,7 @@ GATT_CHARACTERISTIC_ROTATION = "02118733-4455-6677-8899-AABBCCDDEEFF"
 ADDRESS_TYPE = pygatt.BLEAddressType.random
 
 # Recommended number of rotation
-RECOMMENDED_NUM_ROTATION = 3
+RECOMMENDED_NUM_ROTATION = 2
 # Did we already nudged
 nudged = False
 
@@ -70,44 +70,50 @@ def handle_rotation_data(handle, value_bytes):
     # Start movements
     random_movement = random.randrange(0,3)
     print("movement nr: ", random_movement)
+    print "rotation value:", rotation_value
 
-    # Send movement to Arduino to activate actuators
-    ser.write(random_movement)
-    time.sleep(2)
+    if random_movement == 0:
+        print "move BACKWARD"
+        ser.write('0'.encode())
+    if random_movement == 1:
+        print "move FORWARD"
+        ser.write('1'.encode())
+
+    # # Send movement to Arduino to activate actuators
+    # ser.write(random_movement)
+    # time.sleep(2)
 
     # Check if user has made the right movement
     while random_movement == 0:
-        print("move BACKWARD")
+        # print("move BACKWARD")
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
         if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
-            ser.write('1'.encode())
+            ser.write('4'.encode())
             time.sleep(2)
-            ser.write('0'.encode())
             # global nudged
             nudged = True
             random_movement = random.randrange(0,3)
 
     while random_movement == 1:
-        print("move FORWARD")
+        # print("move FORWARD")
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-        if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
-            ser.write('1'.encode())
+        if rotation_values[1] > RECOMMENDED_NUM_ROTATION and not nudged:
+            ser.write('4'.encode())
             time.sleep(2)
-            ser.write('0'.encode())
             # global nudged
             nudged = True
             random_movement = random.randrange(0,3)
     # End own code
 
 
-    if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
-        ser.write('1'.encode())
-        time.sleep(2)
-        ser.write('0'.encode())
-        # global nudged
-        nudged = True
+    # if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
+    #     ser.write('1'.encode())
+    #     time.sleep(2)
+    #     ser.write('0'.encode())
+    #     # global nudged
+    #     nudged = True
 
 
 def keyboard_interrupt_handler(signal_num):
