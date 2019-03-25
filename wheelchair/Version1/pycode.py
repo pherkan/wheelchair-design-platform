@@ -100,7 +100,7 @@ def handle_rotation_data(handle, value_bytes):
         # print("move FORWARD")
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-        if (first_value[1]-rotation_values[1] > RECOMMENDED_NUM_ROTATION and not nudged:
+        if (first_value[1]-rotation_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             time.sleep(2)
             global nudged
