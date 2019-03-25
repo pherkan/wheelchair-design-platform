@@ -34,6 +34,7 @@ RECOMMENDED_NUM_ROTATION = 2
 nudged = False
 
 global rotation_values
+is_first_value = True
 
 # Start reading the serial port
 ser = serial.Serial(
@@ -57,14 +58,16 @@ def handle_rotation_data(handle, value_bytes):
     """
     print("Received data: %s (handle %d)" % (str(value_bytes), handle))
 
+
     rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
 
     # Own code
     # Save first orientation value
-    if rotation_values == None:
+    if is_first_value == True:
         first_value = rotation_values
+        is_first_value = False
         print(first_value)
 
     # Start movements
