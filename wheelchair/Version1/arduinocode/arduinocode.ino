@@ -2,7 +2,7 @@
 // decreases to half speed before starting increasing  again
 
 // Lets make our vibration example, using PWM!
-#define VIB_PIN 10 // Careful, here we have to use a pin that can be used for pwm.
+#define VIB_PIN 7 // Careful, here we have to use a pin that can be used for pwm.
 
 int i = 127;       // Our counter for PWM, we declare it globally,
 // So it lasts for the duration of the entire program.
