@@ -91,7 +91,7 @@ def handle_rotation_data(handle, value_bytes):
         if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             time.sleep(2)
-            # global nudged
+            global nudged
             nudged = True
             random_movement = random.randrange(0,3)
 
@@ -102,7 +102,7 @@ def handle_rotation_data(handle, value_bytes):
         if rotation_values[1] > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             time.sleep(2)
-            # global nudged
+            global nudged
             nudged = True
             random_movement = random.randrange(0,3)
     # End own code
