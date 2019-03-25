@@ -34,8 +34,9 @@ RECOMMENDED_NUM_ROTATION = 2
 nudged = False
 
 global rotation_values
-global is_first_value
+
 is_first_value = True
+global is_first_value
 
 # Start reading the serial port
 ser = serial.Serial(
