@@ -115,6 +115,7 @@ def keyboard_interrupt_handler(signal_num):
     print("Exiting...".format(signal_num))
     left_wheel.unsubscribe(GATT_CHARACTERISTIC_ROTATION)
     exit(0)
+    
 
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
