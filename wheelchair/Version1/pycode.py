@@ -73,10 +73,10 @@ def handle_rotation_data(handle, value_bytes):
     print ("rotation value:", rotation_value)
 
     if random_movement == 0:
-        print "move BACKWARD"
+        print ("move BACKWARD")
         ser.write('0'.encode())
     if random_movement == 1:
-        print "move FORWARD"
+        print ("move FORWARD")
         ser.write('1'.encode())
 
     # # Send movement to Arduino to activate actuators
