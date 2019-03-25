@@ -68,7 +68,7 @@ def handle_rotation_data(handle, value_bytes):
         print(first_value)
 
     # Start movements
-    random_movement = random.randrange(0,3)
+    random_movement = random.randrange(0,1)
     print("movement nr: ", random_movement)
     print ("rotation value:", rotation_values)
 
