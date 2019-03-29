@@ -99,7 +99,8 @@ def handle_rotation_data(handle, value_bytes):
         # print("move BACKWARD")
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-        print(rotation_values[0])
+        print("[0]", rotation_values[0])
+        print("[1]", rotation_values[1])
         time.sleep(5)
         if (first_value[0]-rotation_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
@@ -113,7 +114,8 @@ def handle_rotation_data(handle, value_bytes):
         # print("move FORWARD")
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-        print(rotation_values[1])
+        print("[1]", rotation_values[1])
+        print("[0]", rotation_values[0])
         time.sleep(5)
         if (first_value[1]-rotation_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
