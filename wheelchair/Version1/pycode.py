@@ -97,6 +97,7 @@ def handle_rotation_data(handle, value_bytes):
     # Check if user has made the right movement
     while random_movement == 0:
         # print("move BACKWARD")
+        rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
         print("[0]", rotation_values[0])
@@ -112,6 +113,7 @@ def handle_rotation_data(handle, value_bytes):
 
     while random_movement == 1:
         # print("move FORWARD")
+        rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
         print("[1]", rotation_values[1])
