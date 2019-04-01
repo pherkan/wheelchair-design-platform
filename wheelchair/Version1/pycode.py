@@ -29,7 +29,7 @@ GATT_CHARACTERISTIC_ROTATION = "02118733-4455-6677-8899-AABBCCDDEEFF"
 ADDRESS_TYPE = pygatt.BLEAddressType.random
 
 # Recommended number of rotation
-RECOMMENDED_NUM_ROTATION = 4
+RECOMMENDED_NUM_ROTATION = 1
 # Did we already nudged
 nudged = False
 
@@ -92,7 +92,7 @@ def check_movement(rotation_values):
     # Start movements
     random_movement = random.randrange(0,1)
     print("movement nr: ", random_movement)
-    print ("rotation value:", rotation_values)
+    # print ("rotation value:", rotation_values)
     dif_forward = first_values[0]-rotation_values[0]
     dif_reverse = first_values[1]-rotation_values[1]
     print("rotation value minus start values:", dif_forward, dif_reverse)
@@ -101,31 +101,33 @@ def check_movement(rotation_values):
     # ser.write(random_movement)
     # time.sleep(2)
 
-    print("[0]", rotation_values[0])
-    print("[1]", rotation_values[1])
+    # print("[0]", rotation_values[0])
+    # print("[1]", rotation_values[1])
 
     # Check if user has made the right movement
     if random_movement == 0:
-        print("move BACKWARD")
+        print("move FORWARD")
         ser.write('0'.encode())
-        if (first_values[0]-rotation_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
+        if (rotation_values[0]-first_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             # time.sleep(2)
             global nudged
             nudged = True
             first_value = rotation_values
             random_movement = random.randrange(0,1)
+            nudged = False
 
     elif random_movement == 1:
-        print ("move FORWARD")
+        print ("move BACKWARD")
         ser.write('1'.encode())
-        if (first_values[1]-rotation_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
+        if (rotation_values[1]-first_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             # time.sleep(2)
             global nudged
             nudged = True
             first_value = rotation_values
             random_movement = random.randrange(0,1)
+            nudged = False
             # End own code
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
