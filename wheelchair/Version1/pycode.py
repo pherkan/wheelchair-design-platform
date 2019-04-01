@@ -92,6 +92,7 @@ def check_movement(rotation_values):
         print(first_values)
 
     # Start movements
+    global random_movement
     print("movement nr: ", random_movement)
     # print ("rotation value:", rotation_values)
     dif_forward = rotation_values[0]-first_values[0]
