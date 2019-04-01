@@ -33,7 +33,7 @@ RECOMMENDED_NUM_ROTATION = 4
 # Did we already nudged
 nudged = False
 
-# global rotation_values
+global rotation_values
 # rotation_values = [0,0]
 
 is_first_value = True
