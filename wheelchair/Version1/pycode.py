@@ -123,6 +123,7 @@ def check_movement(rotation_values):
         ser.write('1'.encode())
         if (rotation_values[1]-first_values[1]) > abs(RECOMMENDED_NUM_ROTATION):
             ser.write('4'.encode())
+            time.sleep(2)
             global points
             points+=1
             # time.sleep(2)
