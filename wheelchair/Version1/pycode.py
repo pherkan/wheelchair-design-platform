@@ -66,9 +66,7 @@ def handle_rotation_data(handle, value_bytes):
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
 
-
-
-
+    # end part example code
     # if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
     #     ser.write('1'.encode())
     #     time.sleep(2)
@@ -96,65 +94,67 @@ def keyboard_interrupt_handler(signal_num):
 
 # Own code
 # Save first orientation value
-global is_first_value
 
-if is_first_value == True:
-    first_value = rotation_values
-    is_first_value = False
-    print(first_value)
+def check_movement():
+    global is_first_value
 
-# Start movements
-random_movement = random.randrange(0,1)
-print("movement nr: ", random_movement)
-print ("rotation value:", rotation_values)
-print("rotation value minus start values:", (first_value[0]-rotation_values[0]), (first_value[1]-rotation_values[1]))
-
-if random_movement == 0:
-    print ("move BACKWARD")
-    ser.write('0'.encode())
-    # time.sleep(10)
-
-if random_movement == 1:
-    print ("move FORWARD")
-    ser.write('1'.encode())
-    # time.sleep(10)
-
-# # Send movement to Arduino to activate actuators
-# ser.write(random_movement)
-# time.sleep(2)
-
-# Check if user has made the right movement
-while random_movement == 0:
-    # print("move BACKWARD")
-    # new_rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
-    # find_or_create("dance",
-    #                PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-    print("[0]", rotation_values[0])
-    print("[1]", rotation_values[1])
-    # time.sleep(5)
-    if (first_value[0]-rotation_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
-        ser.write('4'.encode())
-        # time.sleep(2)
-        global nudged
-        nudged = True
+    if is_first_value == True:
         first_value = rotation_values
-        random_movement = random.randrange(0,1)
+        is_first_value = False
+        print(first_value)
 
-while random_movement == 1:
-    # print("move FORWARD")
-    # new_rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
-    # find_or_create("dance",
-    #                PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-    print("[1]", rotation_values[1])
-    print("[0]", rotation_values[0])
-    # time.sleep(5)
-    if (first_value[1]-rotation_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
-        ser.write('4'.encode())
-        # time.sleep(2)
-        global nudged
-        nudged = True
-        first_value = rotation_values
-        random_movement = random.randrange(0,1)
+    # Start movements
+    random_movement = random.randrange(0,1)
+    print("movement nr: ", random_movement)
+    print ("rotation value:", rotation_values)
+    print("rotation value minus start values:", (first_value[0]-rotation_values[0]), (first_value[1]-rotation_values[1]))
+
+    if random_movement == 0:
+        print ("move BACKWARD")
+        ser.write('0'.encode())
+        # time.sleep(10)
+
+    if random_movement == 1:
+        print ("move FORWARD")
+        ser.write('1'.encode())
+        # time.sleep(10)
+
+    # # Send movement to Arduino to activate actuators
+    # ser.write(random_movement)
+    # time.sleep(2)
+
+    # Check if user has made the right movement
+    while random_movement == 0:
+        # print("move BACKWARD")
+        # new_rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
+        # find_or_create("dance",
+        #                PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
+        print("[0]", rotation_values[0])
+        print("[1]", rotation_values[1])
+        # time.sleep(5)
+        if (first_value[0]-rotation_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
+            ser.write('4'.encode())
+            # time.sleep(2)
+            global nudged
+            nudged = True
+            first_value = rotation_values
+            random_movement = random.randrange(0,1)
+
+    while random_movement == 1:
+        # print("move FORWARD")
+        # new_rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
+        # find_or_create("dance",
+        #                PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
+        print("[1]", rotation_values[1])
+        print("[0]", rotation_values[0])
+        # time.sleep(5)
+        if (first_value[1]-rotation_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
+            ser.write('4'.encode())
+            # time.sleep(2)
+            global nudged
+            nudged = True
+            first_value = rotation_values
+            random_movement = random.randrange(0,1)
 
 # End own code
 
@@ -174,3 +174,5 @@ left_wheel.subscribe(GATT_CHARACTERISTIC_ROTATION, callback=handle_rotation_data
 
 # Register our Keyboard handler to exit
 signal.signal(signal.SIGINT, keyboard_interrupt_handler)
+
+check_movement()
