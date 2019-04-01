@@ -97,13 +97,13 @@ def handle_rotation_data(handle, value_bytes):
     # Check if user has made the right movement
     while random_movement == 0:
         # print("move BACKWARD")
-        rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
+        new_rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-        print("[0]", rotation_values[0])
-        print("[1]", rotation_values[1])
+        print("[0]", new_rotation_values[0])
+        print("[1]", new_rotation_values[1])
         # time.sleep(5)
-        if (first_value[0]-rotation_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
+        if (first_value[0]-new_rotation_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             # time.sleep(2)
             global nudged
@@ -113,13 +113,13 @@ def handle_rotation_data(handle, value_bytes):
 
     while random_movement == 1:
         # print("move FORWARD")
-        rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
+        new_rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
         find_or_create("dance",
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-        print("[1]", rotation_values[1])
-        print("[0]", rotation_values[0])
+        print("[1]", new_rotation_values[1])
+        print("[0]", new_rotation_values[0])
         # time.sleep(5)
-        if (first_value[1]-rotation_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
+        if (first_value[1]-new_rotation_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             # time.sleep(2)
             global nudged
