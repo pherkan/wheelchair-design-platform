@@ -137,9 +137,6 @@ my_thing.read()
 bleAdapter = pygatt.GATTToolBackend()
 bleAdapter.start()
 
-if rotation_values is not None:
-    check_movement()
-
 # Use the BLE adapter to connect to our device
 left_wheel = bleAdapter.connect(BLUETOOTH_DEVICE_MAC, address_type=ADDRESS_TYPE)
 
