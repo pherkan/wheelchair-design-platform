@@ -88,7 +88,7 @@ def check_movement(rotation_values):
     if is_first_value == True:
         first_values = rotation_values
         is_first_value = False
-        print(first_value)
+        print(first_values)
 
     # Start movements
     random_movement = random.randrange(0,1)
