@@ -4,8 +4,8 @@
 #define LED_PIN2 7
 #define VIB_PIN 10
 
-Adafruit_NeoPixel LED_controller1 = Adafruit_NeoPixel( 1, LED_PIN1, NEO_RGB + NEO_KHZ800); 
-Adafruit_NeoPixel LED_controller2 = Adafruit_NeoPixel( 1, LED_PIN2, NEO_RGB + NEO_KHZ800); 
+Adafruit_NeoPixel LED_controller1 = Adafruit_NeoPixel( 1, LED_PIN1, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel LED_controller2 = Adafruit_NeoPixel( 1, LED_PIN2, NEO_RGB + NEO_KHZ800);
 
 int i = 127;
 uint8_t R = 0, G = 0, B = 0; // Unsigned integer with 8 bits
@@ -27,7 +27,7 @@ void setup() {
 }
 
 void loop() {
-  
+
   LED_controller1.show(); // Sending updated pixel color to the hardware
   LED_controller2.show(); // Sending updated pixel color to the hardware
 
@@ -40,6 +40,7 @@ void loop() {
       case '0' :
         digitalWrite(VIB_PIN, HIGH);
         delay(1000);
+//        analogWrite(VIB_PIN, 153);
         LED_controller1.setPixelColor( 0, 0xFF0000);
         LED_controller2.setPixelColor( 0, 0xFF0000);
         LED_controller1.show();
@@ -49,6 +50,7 @@ void loop() {
       case '1' :
         digitalWrite(VIB_PIN, HIGH);
         delay(1000);
+//        analogWrite(VIB_PIN, 153);
         LED_controller1.setPixelColor( 0, 0x008000);
         LED_controller2.setPixelColor( 0, 0x008000);
         LED_controller1.show();
@@ -58,6 +60,7 @@ void loop() {
       case '2' :
         digitalWrite(VIB_PIN, HIGH);
         delay(1000);
+//        analogWrite(VIB_PIN, 153);
         LED_controller1.setPixelColor( 0, 0xFF0000);
         LED_controller2.setPixelColor( 0, 0x008000);
         LED_controller1.show();
@@ -67,6 +70,7 @@ void loop() {
       case '3' :
         digitalWrite(VIB_PIN, HIGH);
         delay(1000);
+//        analogWrite(VIB_PIN, 153);
         LED_controller1.setPixelColor( 0, 0x008000);
         LED_controller2.setPixelColor( 0, 0xFF0000);
         LED_controller1.show();
@@ -82,4 +86,3 @@ void loop() {
       }
     }
 }
-
