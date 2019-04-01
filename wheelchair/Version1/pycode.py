@@ -108,26 +108,21 @@ def check_movement(rotation_values):
     if random_movement == 0:
         print("move FORWARD")
         ser.write('0'.encode())
-        if (rotation_values[0]-first_values[0]) > abs(RECOMMENDED_NUM_ROTATION) and not nudged:
+        if (rotation_values[0]-first_values[0]) > abs(RECOMMENDED_NUM_ROTATION):
             ser.write('4'.encode())
             # time.sleep(2)
             global nudged
-            nudged = True
             first_value = rotation_values
             random_movement = random.randrange(0,1)
-            nudged = False
 
     elif random_movement == 1:
         print ("move BACKWARD")
         ser.write('1'.encode())
-        if (rotation_values[1]-first_values[1]) > abs(RECOMMENDED_NUM_ROTATION) and not nudged:
+        if (rotation_values[1]-first_values[1]) > abs(RECOMMENDED_NUM_ROTATION):
             ser.write('4'.encode())
             # time.sleep(2)
-            global nudged
-            nudged = True
             first_value = rotation_values
             random_movement = random.randrange(0,1)
-            nudged = False
             # End own code
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
