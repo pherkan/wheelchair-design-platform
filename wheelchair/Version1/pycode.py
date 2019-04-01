@@ -83,15 +83,15 @@ def keyboard_interrupt_handler(signal_num):
 # Save first orientation value
 
 def check_movement(rotation_values):
-    global is_first_value, first_values
-
+    global is_first_value, first_values, points
+    print("point count:", points)
     if is_first_value == True:
         first_values = rotation_values
+        random_movement = random.randrange(0,1)
         is_first_value = False
         print(first_values)
 
     # Start movements
-    random_movement = random.randrange(0,1)
     print("movement nr: ", random_movement)
     # print ("rotation value:", rotation_values)
     dif_forward = rotation_values[0]-first_values[0]
@@ -114,7 +114,7 @@ def check_movement(rotation_values):
             global points
             points+=1
             # time.sleep(2)
-            first_value = rotation_values
+            first_values = rotation_values
             random_movement = random.randrange(0,1)
 
     elif random_movement == 1:
@@ -125,7 +125,7 @@ def check_movement(rotation_values):
             global points
             points+=1
             # time.sleep(2)
-            first_value = rotation_values
+            first_values = rotation_values
             random_movement = random.randrange(0,1)
             # End own code
 
