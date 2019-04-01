@@ -144,8 +144,7 @@ def check_movement():
             nudged = True
             first_value = rotation_values
             random_movement = random.randrange(0,1)
-
-# End own code
+            # End own code
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
 my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
@@ -155,7 +154,8 @@ my_thing.read()
 bleAdapter = pygatt.GATTToolBackend()
 bleAdapter.start()
 
-check_movement()
+if rotation_values is not None:
+    check_movement()
 
 # Use the BLE adapter to connect to our device
 left_wheel = bleAdapter.connect(BLUETOOTH_DEVICE_MAC, address_type=ADDRESS_TYPE)
