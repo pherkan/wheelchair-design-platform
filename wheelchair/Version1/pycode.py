@@ -32,6 +32,7 @@ ADDRESS_TYPE = pygatt.BLEAddressType.random
 RECOMMENDED_NUM_ROTATION = 1
 # Did we already nudged
 nudged = False
+points = 0
 
 first_values = [0,0]
 is_first_value = True
@@ -110,8 +111,9 @@ def check_movement(rotation_values):
         ser.write('0'.encode())
         if (rotation_values[0]-first_values[0]) > abs(RECOMMENDED_NUM_ROTATION):
             ser.write('4'.encode())
+            global points
+            points++
             # time.sleep(2)
-            global nudged
             first_value = rotation_values
             random_movement = random.randrange(0,1)
 
@@ -120,6 +122,8 @@ def check_movement(rotation_values):
         ser.write('1'.encode())
         if (rotation_values[1]-first_values[1]) > abs(RECOMMENDED_NUM_ROTATION):
             ser.write('4'.encode())
+            global points
+            points++
             # time.sleep(2)
             first_value = rotation_values
             random_movement = random.randrange(0,1)
