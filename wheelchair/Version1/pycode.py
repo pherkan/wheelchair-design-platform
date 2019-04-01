@@ -60,6 +60,7 @@ def handle_rotation_data(handle, value_bytes):
     print("Received data: %s (handle %d)" % (str(value_bytes), handle))
 
     rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
+    print("rotation_values", rotation_values)
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
     # print("rotation values:", rotation_values)

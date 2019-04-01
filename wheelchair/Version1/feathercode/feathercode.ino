@@ -49,8 +49,8 @@ Adafruit_BNO055 bno = Adafruit_BNO055(55);
 // initialized with a global variable global_rotations, this variable stores rotations
 // on a particular axis, in both directions, since startup
 struct Rotations {
-  float forward_rotations = 0;
-  float reverse_rotations = 0;
+  double forward_rotations = 0;
+  double reverse_rotations = 0;
 } global_rotations;
 
 bool not_first_loop = false; // Boolean variable to stop logging of first loop
@@ -144,22 +144,22 @@ void setup(void) {
 }
 
 void orientation() {
-  // Get Quaternion data (no 'Gimbal Lock' like with Euler angles)
-  imu::Quaternion quat = bno.getQuat();
-  float quatX = quat.x();
-  float quatY = quat.y();
-  float quatZ = quat.z();
+  // Get Euler angle data
+  imu::Vector<3> euler_vector = bno.getVector(Adafruit_BNO055::VECTOR_EULER)
+  float angleX = euler_vector.x();
+  float angleY = euler_vector.y();
+  float angleZ = euler_vector.z();
 
   // Command is sent when \n (\r) or println is called
   // AT+GATTCHAR=CharacteristicID,value
   ble.print( F("AT+GATTCHAR=") );
   ble.print( orientationCharId );
   ble.print( F(",") );
-  ble.print(String(quatX));
+  ble.print(String(angleX));
   ble.print( F(",") );
-  ble.print(String(quatY));
+  ble.print(String(angleY));
   ble.print( F(",") );
-  ble.println(String(quatZ));
+  ble.println(String(angleZ));
 }
 
 bool compute_rotations(float axis, Rotations * rotations) {
