@@ -33,11 +33,8 @@ RECOMMENDED_NUM_ROTATION = 4
 # Did we already nudged
 nudged = False
 
-rotation_values = None
-# rotation_values = [0,0]
-
+first_values = [0,0]
 is_first_value = True
-global is_first_value
 
 # Start reading the serial port
 ser = serial.Serial(
@@ -61,10 +58,11 @@ def handle_rotation_data(handle, value_bytes):
     """
     print("Received data: %s (handle %d)" % (str(value_bytes), handle))
 
-    global rotation_values
     rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
+
+    check_movement(rotation_values)
 
     # end part example code
     # if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
@@ -84,11 +82,11 @@ def keyboard_interrupt_handler(signal_num):
 # Own code
 # Save first orientation value
 
-def check_movement():
+def check_movement(rotation_values):
     global is_first_value
 
     if is_first_value == True:
-        first_value = rotation_values
+        first_values = rotation_values
         is_first_value = False
         print(first_value)
 
@@ -96,32 +94,22 @@ def check_movement():
     random_movement = random.randrange(0,1)
     print("movement nr: ", random_movement)
     print ("rotation value:", rotation_values)
-    print("rotation value minus start values:", (first_value[0]-rotation_values[0]), (first_value[1]-rotation_values[1]))
-
-    if random_movement == 0:
-        print ("move BACKWARD")
-        ser.write('0'.encode())
-        # time.sleep(10)
-
-    if random_movement == 1:
-        print ("move FORWARD")
-        ser.write('1'.encode())
-        # time.sleep(10)
+    print("rotation value minus start values:",
+        (first_values[0]-rotation_values[0]),
+        (first_values[1]-rotation_values[1]))
 
     # # Send movement to Arduino to activate actuators
     # ser.write(random_movement)
     # time.sleep(2)
 
+    print("[0]", rotation_values[0])
+    print("[1]", rotation_values[1])
+
     # Check if user has made the right movement
-    while random_movement == 0:
-        # print("move BACKWARD")
-        # new_rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
-        # find_or_create("dance",
-        #                PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-        print("[0]", rotation_values[0])
-        print("[1]", rotation_values[1])
-        # time.sleep(5)
-        if (first_value[0]-rotation_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
+    if random_movement == 0:
+        print("move BACKWARD")
+        ser.write('0'.encode())
+        if (first_values[0]-rotation_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             # time.sleep(2)
             global nudged
@@ -129,15 +117,10 @@ def check_movement():
             first_value = rotation_values
             random_movement = random.randrange(0,1)
 
-    while random_movement == 1:
-        # print("move FORWARD")
-        # new_rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
-        # find_or_create("dance",
-        #                PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-        print("[1]", rotation_values[1])
-        print("[0]", rotation_values[0])
-        # time.sleep(5)
-        if (first_value[1]-rotation_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
+    elif random_movement == 1:
+        print ("move FORWARD")
+        ser.write('1'.encode())
+        if (first_values[1]-rotation_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
             # time.sleep(2)
             global nudged
