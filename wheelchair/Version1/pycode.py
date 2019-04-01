@@ -166,6 +166,8 @@ my_thing.read()
 bleAdapter = pygatt.GATTToolBackend()
 bleAdapter.start()
 
+check_movement()
+
 # Use the BLE adapter to connect to our device
 left_wheel = bleAdapter.connect(BLUETOOTH_DEVICE_MAC, address_type=ADDRESS_TYPE)
 
@@ -174,5 +176,3 @@ left_wheel.subscribe(GATT_CHARACTERISTIC_ROTATION, callback=handle_rotation_data
 
 # Register our Keyboard handler to exit
 signal.signal(signal.SIGINT, keyboard_interrupt_handler)
-
-check_movement()
