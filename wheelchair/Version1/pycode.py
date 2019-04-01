@@ -94,9 +94,9 @@ def check_movement(rotation_values):
     random_movement = random.randrange(0,1)
     print("movement nr: ", random_movement)
     print ("rotation value:", rotation_values)
-    print("rotation value minus start values:",
-        (first_values[0]-rotation_values[0]),
-        (first_values[1]-rotation_values[1]))
+    dif_forward = first_values[0]-rotation_values[0]
+    dif_reverse = first_values[1]-rotation_values[1]
+    print("rotation value minus start values:", dif_forward, dif_reverse)
 
     # # Send movement to Arduino to activate actuators
     # ser.write(random_movement)
