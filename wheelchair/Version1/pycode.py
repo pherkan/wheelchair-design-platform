@@ -61,7 +61,7 @@ def handle_rotation_data(handle, value_bytes):
     rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-    print("rotation values:", rotation_values)
+    # print("rotation values:", rotation_values)
     check_movement(rotation_values)
 
     # end part example code
