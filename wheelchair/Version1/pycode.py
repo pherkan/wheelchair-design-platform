@@ -110,7 +110,7 @@ def check_movement(rotation_values):
     if random_movement == 0:
         print("move FORWARD")
         ser.write('0'.encode())
-        if (rotation_values[0]-first_values[0]) > abs(RECOMMENDED_NUM_ROTATION):
+        if (rotation_values[0]-first_values[0]) > RECOMMENDED_NUM_ROTATION:
             ser.write('4'.encode())
             global points
             points+=1
@@ -121,7 +121,7 @@ def check_movement(rotation_values):
     elif random_movement == 1:
         print ("move BACKWARD")
         ser.write('1'.encode())
-        if (rotation_values[1]-first_values[1]) > abs(RECOMMENDED_NUM_ROTATION):
+        if (rotation_values[1]-first_values[1]) > RECOMMENDED_NUM_ROTATION:
             ser.write('4'.encode())
             time.sleep(2)
             global points
