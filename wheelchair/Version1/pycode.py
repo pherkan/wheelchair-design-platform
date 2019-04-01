@@ -83,7 +83,7 @@ def keyboard_interrupt_handler(signal_num):
 # Save first orientation value
 
 def check_movement(rotation_values):
-    global is_first_value
+    global is_first_value, first_values
 
     if is_first_value == True:
         first_values = rotation_values
