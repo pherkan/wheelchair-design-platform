@@ -104,8 +104,10 @@ def check_movement(rotation_values):
     # ser.write(random_movement)
     # time.sleep(2)
 
-    # print("[0]", rotation_values[0])
-    # print("[1]", rotation_values[1])
+    print("[0]", rotation_values[0])
+    print("[1]", rotation_values[1])
+    print("first[0]", first_values[0])
+    print("first[1]", first_values[1])
 
     # Check if user has made the right movement
     if random_movement == 0:
