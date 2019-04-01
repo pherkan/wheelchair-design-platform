@@ -130,7 +130,6 @@ def check_movement(rotation_values):
             first_values = rotation_values
             random_movement = random.randint(0,1)
             # End own code
-    time.sleep(5)
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
 my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
