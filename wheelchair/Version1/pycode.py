@@ -29,7 +29,7 @@ GATT_CHARACTERISTIC_ROTATION = "02118733-4455-6677-8899-AABBCCDDEEFF"
 ADDRESS_TYPE = pygatt.BLEAddressType.random
 
 # Recommended number of rotation
-RECOMMENDED_NUM_ROTATION = 20
+RECOMMENDED_NUM_ROTATION = 4
 # Did we already nudged
 nudged = False
 
@@ -83,12 +83,12 @@ def handle_rotation_data(handle, value_bytes):
     if random_movement == 0:
         print ("move BACKWARD")
         ser.write('0'.encode())
-        time.sleep(10)
+        # time.sleep(10)
 
     if random_movement == 1:
         print ("move FORWARD")
         ser.write('1'.encode())
-        time.sleep(10)
+        # time.sleep(10)
 
     # # Send movement to Arduino to activate actuators
     # ser.write(random_movement)
@@ -102,14 +102,14 @@ def handle_rotation_data(handle, value_bytes):
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
         print("[0]", rotation_values[0])
         print("[1]", rotation_values[1])
-        time.sleep(5)
+        # time.sleep(5)
         if (first_value[0]-rotation_values[0]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
-            time.sleep(2)
+            # time.sleep(2)
             global nudged
             nudged = True
             first_value = rotation_values
-            random_movement = random.randrange(0,3)
+            random_movement = random.randrange(0,1)
 
     while random_movement == 1:
         # print("move FORWARD")
@@ -118,14 +118,14 @@ def handle_rotation_data(handle, value_bytes):
                        PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
         print("[1]", rotation_values[1])
         print("[0]", rotation_values[0])
-        time.sleep(5)
+        # time.sleep(5)
         if (first_value[1]-rotation_values[1]) > RECOMMENDED_NUM_ROTATION and not nudged:
             ser.write('4'.encode())
-            time.sleep(2)
+            # time.sleep(2)
             global nudged
             nudged = True
             first_value = rotation_values
-            random_movement = random.randrange(0,3)
+            random_movement = random.randrange(0,1)
 
     # End own code
 
