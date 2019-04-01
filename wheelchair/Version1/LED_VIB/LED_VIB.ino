@@ -36,31 +36,22 @@ void loop() {
 //  int inByte = Serial.read();
 
     switch (command) {
-      //backward
-      case '0' :
-        analogWrite(VIB_PIN, 153);
-        delay(1000);
-        analogWrite(VIB_PIN, 0);
-        LED_controller1.setPixelColor( 0, 0xFF0000);
-        LED_controller2.setPixelColor( 0, 0xFF0000);
-        LED_controller1.show();
-        LED_controller2.show();
-        break;
       //forward
-      case '1' :
-        analogWrite(VIB_PIN, 153);
-        delay(1000);
-        analogWrite(VIB_PIN, 0);
+      case '0' :
         LED_controller1.setPixelColor( 0, 0x008000);
         LED_controller2.setPixelColor( 0, 0x008000);
         LED_controller1.show();
         LED_controller2.show();
         break;
+      //backward
+      case '1' :
+        LED_controller1.setPixelColor( 0, 0xFF0000);
+        LED_controller2.setPixelColor( 0, 0xFF0000);
+        LED_controller1.show();
+        LED_controller2.show();
+        break;
       //right
       case '2' :
-        analogWrite(VIB_PIN, 153);
-        delay(1000);
-        analogWrite(VIB_PIN, 0);
         LED_controller1.setPixelColor( 0, 0xFF0000);
         LED_controller2.setPixelColor( 0, 0x008000);
         LED_controller1.show();
@@ -68,14 +59,16 @@ void loop() {
         break;
       //left
       case '3' :
-        analogWrite(VIB_PIN, 153);
-        delay(1000);
-        analogWrite(VIB_PIN, 0);
         LED_controller1.setPixelColor( 0, 0x008000);
         LED_controller2.setPixelColor( 0, 0xFF0000);
         LED_controller1.show();
         LED_controller2.show();
         break;
+      //vibration
+      case '4' :
+        analogWrite(VIB_PIN, 153);
+        delay(2000);
+        analogWrite(VIB_PIN, 0);
       default:
         LED_controller1.setPixelColor( 0, 0xFFFFFF);
         LED_controller2.setPixelColor( 0, 0xFFFFFF);
