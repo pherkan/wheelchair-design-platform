@@ -87,7 +87,7 @@ def check_movement(rotation_values):
     print("point count:", points)
     if is_first_value == True:
         first_values = rotation_values
-        random_movement = random.randrange(0,1)
+        random_movement = random.randint(0,1)
         is_first_value = False
         print(first_values)
 
@@ -116,7 +116,7 @@ def check_movement(rotation_values):
             points+=1
             # time.sleep(2)
             first_values = rotation_values
-            random_movement = random.randrange(0,1)
+            random_movement = random.randint(0,1)
 
     elif random_movement == 1:
         print ("move BACKWARD")
@@ -128,7 +128,7 @@ def check_movement(rotation_values):
             points+=1
             # time.sleep(2)
             first_values = rotation_values
-            random_movement = random.randrange(0,1)
+            random_movement = random.randint(0,1)
             # End own code
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
