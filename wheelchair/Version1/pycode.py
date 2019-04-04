@@ -30,12 +30,15 @@ ADDRESS_TYPE = pygatt.BLEAddressType.random
 
 # Recommended number of rotation
 RECOMMENDED_NUM_ROTATION = 1
+RECOMMENDED_NUM_ORIENTATION = 1
 # Did we already nudged
 nudged = False
 points = 0
 
 first_values = [0,0]
 is_first_value = True
+first_values_orientation = [0,0]
+is_first_value_orientation = True
 
 # Start reading the serial port
 ser = serial.Serial(
@@ -99,7 +102,7 @@ def check_movement(rotation_values):
     print("point count:", points)
     if is_first_value == True:
         first_values = rotation_values
-        random_movement = random.randint(0,1)
+        random_movement = random.randint(0,3)
         is_first_value = False
         print(first_values)
 
@@ -129,7 +132,7 @@ def check_movement(rotation_values):
             global points
             points+=1
             first_values = rotation_values
-            random_movement = random.randint(0,1)
+            random_movement = random.randint(0,3)
 
     elif random_movement == 1:
         print ("move BACKWARD")
@@ -140,12 +143,57 @@ def check_movement(rotation_values):
             global points
             points+=1
             first_values = rotation_values
-            random_movement = random.randint(0,1)
+            random_movement = random.randint(0,3)
             # End own code
 
 def check_movement_orientation(orientation_values):
-    print(orientation_values)
+    global is_first_value_orientation, first_values_orientation, points
+    print("point count:", points)
+    if is_first_value_orientation == True:
+        first_values_orientation = orientation_values
+        random_movement = random.randint(0,3)
+        is_first_value_orientation = False
+        print(first_values)
 
+    # Start movements
+    global random_movement
+    print("movement nr: ", random_movement)
+    # print ("rotation value:", rotation_values)
+    dif_forward = rotation_values_orientation[0]-first_values_orientation[0]
+    dif_reverse = rotation_values_orientation[1]-first_values_orientation[1]
+    print("orientation value minus start values:", dif_forward, dif_reverse)
+
+    # # Send movement to Arduino to activate actuators
+    # ser.write(random_movement)
+    # time.sleep(2)
+
+    print("[0]", orientation_values[0])
+    print("[1]", orientation_values[1])
+    print("first[0]", first_values_orientation[0])
+    print("first[1]", first_values_orientation[1])
+
+    # Check if user has made the right movement
+    if random_movement == 2:
+        print("turn RIGHT")
+        ser.write('2'.encode())
+        if (dif_forward) > RECOMMENDED_NUM_ORIENTATION:
+            ser.write('4'.encode())
+            global points
+            points+=1
+            first_values = rotation_values
+            random_movement = random.randint(0,3)
+
+    elif random_movement == 3:
+        print ("turn LEFT")
+        ser.write('3'.encode())
+        if (dif_reverse) > -(RECOMMENDED_NUM_ORIENTATION):
+            ser.write('4'.encode())
+            time.sleep(2)
+            global points
+            points+=1
+            first_values_orientation = orientation_values
+            random_movement = random.randint(0,3)
+            # End own code
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
 my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
