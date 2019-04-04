@@ -129,6 +129,7 @@ def check_movement(rotation_values):
         ser.write('0'.encode())
         if (dif_forward) > RECOMMENDED_NUM_ROTATION:
             ser.write('4'.encode())
+            time.sleep(2)
             global points
             points+=1
             first_values = rotation_values
@@ -187,6 +188,7 @@ def check_movement_orientation(orientation_values):
         ser.write('2'.encode())
         if (dif_forward) > RECOMMENDED_NUM_ORIENTATION:
             ser.write('4'.encode())
+            time.sleep(2)
             global points
             points+=1
             global first_values
