@@ -102,7 +102,7 @@ def check_movement(rotation_values):
     print("point count:", points)
     if is_first_value == True:
         first_values = rotation_values
-        random_movement = random.randint(0,3)
+        random_movement = random.randint(0,1)
         is_first_value = False
         print(first_values)
 
@@ -161,7 +161,7 @@ def check_movement_orientation(orientation_values):
     print("point count:", points)
     if is_first_value_orientation == True:
         first_values_orientation = orientation_values
-        random_movement = random.randint(0,3)
+        random_movement = random.randint(2,3)
         is_first_value_orientation = False
         print(first_values)
 
