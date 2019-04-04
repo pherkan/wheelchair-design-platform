@@ -64,7 +64,7 @@ def handle_rotation_data(handle, value_bytes):
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
     # print("rotation values:", rotation_values)
-    check_movement(rotation_values)
+    # check_movement(rotation_values)
 
     # end part example code
     # if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
