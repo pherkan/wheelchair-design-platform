@@ -146,6 +146,8 @@ def check_movement(rotation_values):
             random_movement = random.randint(0,3)
             # End own code
 
+    elif return
+
 def check_movement_orientation(orientation_values):
     global is_first_value_orientation, first_values_orientation, points
     print("point count:", points)
@@ -194,6 +196,7 @@ def check_movement_orientation(orientation_values):
             first_values_orientation = orientation_values
             random_movement = random.randint(0,3)
             # End own code
+    elif return
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
 my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
