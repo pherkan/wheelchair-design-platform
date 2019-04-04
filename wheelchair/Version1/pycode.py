@@ -74,6 +74,17 @@ def handle_rotation_data(handle, value_bytes):
     #     # global nudged
     #     nudged = True
 
+def handle_orientation_data(handle, value_bytes):
+    """
+    handle -- integer, characteristic read handle the data was received on
+    value_bytes -- bytearray, the data returned in the notification
+    """
+    print("Received data: %s (handle %d)" % (str(value_bytes), handle))
+    values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
+    find_or_create("Left Wheel Orientation",
+                   PropertyType.THREE_DIMENSIONS).update_values(orientation_values)
+
+
 def keyboard_interrupt_handler(signal_num):
     """Make sure we close our program properly"""
     print("Exiting...".format(signal_num))
@@ -131,6 +142,10 @@ def check_movement(rotation_values):
             first_values = rotation_values
             random_movement = random.randint(0,1)
             # End own code
+
+def check_movement_orientation(orientation_values):
+    print(orientation_values)
+
 
 # Instantiate a thing with its credential, then read its properties from the DCD Hub
 my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
