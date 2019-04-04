@@ -132,6 +132,9 @@ def check_movement(rotation_values):
             global points
             points+=1
             first_values = rotation_values
+            global first_values_orientation
+            global orientation_values
+            first_values_orientation = orientation_values
             random_movement = random.randint(0,3)
 
     elif random_movement == 1:
@@ -143,6 +146,9 @@ def check_movement(rotation_values):
             global points
             points+=1
             first_values = rotation_values
+            global first_values_orientation
+            global orientation_values
+            first_values_orientation = orientation_values
             random_movement = random.randint(0,3)
             # End own code
 
@@ -183,6 +189,9 @@ def check_movement_orientation(orientation_values):
             ser.write('4'.encode())
             global points
             points+=1
+            global first_values
+            global rotation_values
+            first_values_orientation = orientation_values
             first_values = rotation_values
             random_movement = random.randint(0,3)
 
