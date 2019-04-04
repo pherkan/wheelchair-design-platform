@@ -83,7 +83,7 @@ def handle_orientation_data(handle, value_bytes):
     values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
     find_or_create("Left Wheel Orientation",
                    PropertyType.THREE_DIMENSIONS).update_values(orientation_values)
-
+    check_movement_orientation(orientation_values)
 
 def keyboard_interrupt_handler(signal_num):
     """Make sure we close our program properly"""
