@@ -63,7 +63,6 @@ def handle_rotation_data(handle, value_bytes):
     print("Received data: %s (handle %d)" % (str(value_bytes), handle))
 
     rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
-    print("rotation_values", rotation_values)
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
     # print("rotation values:", rotation_values)
@@ -76,17 +75,6 @@ def handle_rotation_data(handle, value_bytes):
     #     ser.write('0'.encode())
     #     # global nudged
     #     nudged = True
-
-def handle_orientation_data(handle, value_bytes):
-    """
-    handle -- integer, characteristic read handle the data was received on
-    value_bytes -- bytearray, the data returned in the notification
-    """
-    print("Received data: %s (handle %d)" % (str(value_bytes), handle))
-    values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
-    find_or_create("Left Wheel Orientation",
-                   PropertyType.THREE_DIMENSIONS).update_values(orientation_values)
-    check_movement_orientation(orientation_values)
 
 def keyboard_interrupt_handler(signal_num):
     """Make sure we close our program properly"""
@@ -102,7 +90,7 @@ def check_movement(rotation_values):
     print("point count:", points)
     if is_first_value == True:
         first_values = rotation_values
-        random_movement = random.randint(0,3)
+        random_movement = random.randint(0,1)
         is_first_value = False
         print(first_values)
 
@@ -136,7 +124,7 @@ def check_movement(rotation_values):
             # global first_values_orientation
             # global orientation_values
             # first_values_orientation = orientation_values
-            random_movement = random.randint(0,3)
+            random_movement = random.randint(0,1)
 
     elif random_movement == 1:
         print ("move BACKWARD")
@@ -150,64 +138,9 @@ def check_movement(rotation_values):
             # global first_values_orientation
             # global orientation_values
             # first_values_orientation = orientation_values
-            random_movement = random.randint(0,3)
+            random_movement = random.randint(0,1)
             # End own code
 
-    else :
-        exit(0)
-
-def check_movement_orientation(orientation_values):
-    global is_first_value_orientation, first_values_orientation, points
-    print("point count:", points)
-    if is_first_value_orientation == True:
-        first_values_orientation = orientation_values
-        random_movement = random.randint(0,3)
-        is_first_value_orientation = False
-        print(first_values)
-
-    # Start movements
-    global random_movement
-    print("movement nr: ", random_movement)
-    # print ("rotation value:", rotation_values)
-    dif_forward = rotation_values_orientation[0]-first_values_orientation[0]
-    dif_reverse = rotation_values_orientation[1]-first_values_orientation[1]
-    print("orientation value minus start values:", dif_forward, dif_reverse)
-
-    # # Send movement to Arduino to activate actuators
-    # ser.write(random_movement)
-    # time.sleep(2)
-
-    print("OV[0]", orientation_values[0])
-    print("OV[1]", orientation_values[1])
-    print("OVfirst[0]", first_values_orientation[0])
-    print("OVfirst[1]", first_values_orientation[1])
-
-    # Check if user has made the right movement
-    if random_movement == 2:
-        print("turn RIGHT")
-        ser.write('2'.encode())
-        if (dif_forward) > RECOMMENDED_NUM_ORIENTATION:
-            ser.write('4'.encode())
-            time.sleep(2)
-            global points
-            points+=1
-            # global first_values
-            # global rotation_values
-            first_values_orientation = orientation_values
-            # first_values = rotation_values
-            random_movement = random.randint(0,3)
-
-    elif random_movement == 3:
-        print ("turn LEFT")
-        ser.write('3'.encode())
-        if (dif_reverse) > -(RECOMMENDED_NUM_ORIENTATION):
-            ser.write('4'.encode())
-            time.sleep(2)
-            global points
-            points+=1
-            first_values_orientation = orientation_values
-            random_movement = random.randint(0,3)
-            # End own code
     else :
         exit(0)
 
