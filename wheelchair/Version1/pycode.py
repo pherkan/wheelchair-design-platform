@@ -30,15 +30,13 @@ ADDRESS_TYPE = pygatt.BLEAddressType.random
 
 # Recommended number of rotation
 RECOMMENDED_NUM_ROTATION = 1
-RECOMMENDED_NUM_ORIENTATION = 1
+
 # Did we already nudged
 nudged = False
 points = 0
 
 first_values = [0,0]
 is_first_value = True
-first_values_orientation = [0,0]
-is_first_value_orientation = True
 
 # Start reading the serial port
 ser = serial.Serial(
