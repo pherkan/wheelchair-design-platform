@@ -2,10 +2,10 @@
 
 In this document we will describe the functioning of our IoT wheelchair. We designed a wheelchair to let users dance. It works like guitar hero. LED signals tell the user what move to make, if the move was correct, the seat will vibrate and the LEDs will tell the user what move to make next.
 
-###Libraries
+### Libraries
 The following libraries need to be installed in order to successfully run the code:
 
-####In python:
+#### In python:
 '''python
 import pygatt  # To access BLE GATT support
 import signal  # To catch the Ctrl+C and end the program properly
@@ -22,7 +22,7 @@ from dcd.entities.property_type import PropertyType
 '''
 
 
-###Code
+### Code
 
 
-###Wiring
+### Wiring
