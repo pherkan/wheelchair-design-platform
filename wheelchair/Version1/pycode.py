@@ -151,7 +151,7 @@ bleAdapter = pygatt.GATTToolBackend()
 bleAdapter.start()
 
 # Use the BLE adapter to connect to our device
-left_wheel = bleAdapter.connect(BLUETOOTH_DEVICE_MAC, address_type=ADDRESS_TYPE)
+left_wheel = bleAdapter.connect(BLUETOOTH_DEVICE_MAC, address_type=ADDRESS_TYPE, timeout = 100.0)
 
 # Subscribe to the GATT services
 left_wheel.subscribe(GATT_CHARACTERISTIC_ROTATION, callback=handle_rotation_data)
