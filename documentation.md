@@ -5,7 +5,7 @@ In this document we will describe the functioning of our IoT wheelchair. We desi
 ### Libraries
 The following libraries need to be installed in order to successfully run the code:
 
-#### In python:
+#### In python on Raspberry pi:
 '''python
 import pygatt  # To access BLE GATT support
 import signal  # To catch the Ctrl+C and end the program properly
@@ -18,9 +18,10 @@ from dcd.entities.thing import Thing
 from dcd.entities.property_type import PropertyType
 '''
 
-#### In arduino:
+#### On arduino:
 '''
 
+#### On Feather:
 
 ### Code
 
