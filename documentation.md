@@ -14,13 +14,32 @@ from dotenv import load_dotenv  # To load environment variables from .env file
 import serial
 import time
 import random # to generate random movements
+
+# DCD
 from dcd.entities.thing import Thing
 from dcd.entities.property_type import PropertyType
 ```
 
-#### On arduino:
-
 #### On Feather:
+```C
+#include <Arduino.h>
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BNO055.h>
+#include <utility/imumaths.h>
+#include "Adafruit_BLE.h"
+#include "Adafruit_BluefruitLE_SPI.h"
+#include "Adafruit_BluefruitLE_UART.h"
+
+#include "BluefruitConfig.h"
+
+#if SOFTWARE_SERIAL_AVAILABLE
+  #include <SoftwareSerial.h>
+#endif
+
+#include "BluefruitConfig.h"
+```
 
 ### Code
 
