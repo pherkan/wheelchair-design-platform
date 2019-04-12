@@ -1,9 +1,8 @@
-# Dance wheelchair
-
-In this document we will describe the functioning of our IoT wheelchair. We designed a wheelchair to let users dance. It works like guitar hero. LED signals tell the user what move to make, if the move was correct, the seat will vibrate and the LEDs will tell the user what move to make next.
+# Dance Wheelchair
+In this document the functioning of the Internet-connected Wheelchair called Dance Wheelchair will be explained. This internet-connected wheelchair lets wheelchair uses dance in the same way that is being done at a gaming arcade hall. LED signals tell the user what to do in a way how to choreograph the dance. If the user moves correctly, he gets input in the form of the LED lights and a vibration. Subsequently, the user gets input on the next move to perform.
 
 ### Libraries
-The following libraries need to be installed in order to successfully run the code:
+The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works. 
 
 #### In python on Raspberry pi:
 ```python
