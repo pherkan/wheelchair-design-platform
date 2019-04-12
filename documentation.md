@@ -45,3 +45,4 @@ from dcd.entities.property_type import PropertyType
 
 
 ### Wiring
+https://www.tinkercad.com/things/7NosIb3B7m8-stunning-blad/editel?tenant=circuits?sharecode=-iT8iiwYHXB-MzWQWOSuqNqyqwceIcqcFFds_0Dsx5k=
