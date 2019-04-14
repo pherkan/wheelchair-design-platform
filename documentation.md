@@ -1,10 +1,28 @@
 # Dance Wheelchair
 In this document the functioning of the Internet-connected Wheelchair called Dance Wheelchair will be explained. This internet-connected wheelchair lets wheelchair uses dance in the same way that is being done at a gaming arcade hall. LED signals tell the user what to do in a way how to choreograph the dance. If the user moves correctly, he gets input in the form of the LED lights and a vibration. Subsequently, the user gets input on the next move to perform.
 
-### Libraries
-The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works. 
+### Components
+- Any Wheelchair
+- Two pieces of thin ply wood
+- +- 1 meter of velcro
+- +- 6 tie-wraps
+- 1 Raspberry Pi
+- 1 Adafruit bluefruit feather
+- 1 Arduino mega
+- 1 Small Powerbank
+- 1 Big Powerbank
+- 10 male to male jumper wires
+- 1 vibration motor
+- 2 rgb LED's
+- 2 condensators
+- 2 resistors of 350kΩ
 
-#### In python on Raspberry pi:
+### Assembling the wheelchair
+
+### Libraries
+The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
+
+#### In python on Raspberry pi: ####
 ```python
 import pygatt  # To access BLE GATT support
 import signal  # To catch the Ctrl+C and end the program properly
@@ -41,6 +59,7 @@ from dcd.entities.property_type import PropertyType
 ```
 
 ### Code
+This code needs to run on the Raspberry pi:
 
 
 ### Wiring
