@@ -6,6 +6,7 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 - Two pieces of thin ply wood
 - +- 1 meter of velcro
 - +- 6 tie-wraps
+- Tape
 - 1 Raspberry Pi
 - 1 Adafruit bluefruit feather
 - 1 Arduino mega
@@ -18,9 +19,12 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 - 2 resistors of 350kΩ
 
 ### Assembling the wheelchair
+By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a powerbank. The feather is attached to the wheel with its separate powerbank. By using tie wraps and tape, these parts are added on the wheelchair.
 
 ### Libraries
 The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
+
+
 
 #### In python on Raspberry pi: ####
 ```python
