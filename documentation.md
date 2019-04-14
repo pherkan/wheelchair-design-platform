@@ -80,7 +80,15 @@ Download Adafruit Neopixel library to control the LEDs.
 
 
 ## 4 Code
+
+### 4.1. Code for Raspberry Pi
 This code needs to run on the Raspberry pi:
+
+### 4.2. Code for Adafruit Bluefruit feather
+
+### 4.3. Code for Arduino Mega
+This code enabled Arduino Mega to receive signals from Raspberry Pi through its serial port and actuates 2 LED lights and the vibration motor. 
+
 
 
 ## 5 Wiring
