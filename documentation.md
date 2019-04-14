@@ -1,12 +1,8 @@
 # Dance Wheelchair
 In this document the functioning of the Internet-connected Wheelchair called Dance Wheelchair will be explained. This internet-connected wheelchair lets wheelchair uses dance in the same way that is being done at a gaming arcade hall. LED signals tell the user what to do in a way how to choreograph the dance. If the user moves correctly, he gets input in the form of the LED lights and a vibration. Subsequently, the user gets input on the next move to perform.
 
-<<<<<<< HEAD
 ![](images/Poster-IOT.jpeg)
 
-### Libraries
-The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
-=======
 ### Components
 - Any Wheelchair
 - Two pieces of thin ply wood
@@ -31,7 +27,6 @@ By using two pieces of plywood and applying these to the inside of the wheels, a
 The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
 
 
->>>>>>> ba9a6e61e1032dbb5fa0c57cfa1d39b8b72b0053
 
 #### In python on Raspberry pi: ####
 ```python
