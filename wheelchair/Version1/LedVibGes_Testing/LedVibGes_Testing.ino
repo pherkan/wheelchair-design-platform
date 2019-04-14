@@ -6,7 +6,7 @@
 #define LED_PIN2 7
 #define VIB_PIN 10
 
-Adafruit_APDS9960 apds; 
+Adafruit_APDS9960 apds;
 Adafruit_NeoPixel LED_controller1 = Adafruit_NeoPixel( 1, LED_PIN1, NEO_RGB + NEO_KHZ800);
 Adafruit_NeoPixel LED_controller2 = Adafruit_NeoPixel( 1, LED_PIN2, NEO_RGB + NEO_KHZ800);
 
