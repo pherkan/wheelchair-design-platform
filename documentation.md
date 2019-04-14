@@ -1,13 +1,19 @@
 # Dance Wheelchair
-In this document the functioning of the Internet-connected Wheelchair called Dance Wheelchair will be explained. This internet-connected wheelchair lets wheelchair uses dance in the same way that is being done at a gaming arcade hall. LED signals tell the user what to do in a way how to choreograph the dance. If the user moves correctly, he gets input in the form of the LED lights and a vibration. Subsequently, the user gets input on the next move to perform.
+In this document the functioning of the Internet-connected Wheelchair called Dance Wheelchair will be explained. This internet-connected wheelchair lets wheelchair users dance in the same way that is being done at a gaming arcade hall. Just as the game screen shows different arrow keys for people to step on the dance platform, LED light signals of Dance Wheelchair  guide the user which direction to move, giving her/him cues to choreograph the dance. If the user moves correctly, she/he is notified with brief vibration and gets next dance cue from the LED lights. In this way, people on a wheelchair can enjoy their own DANCE DANCE REVOLUTION!
 
-![](images/Poster-IOT.jpeg)
+1. [Components](#1-Components)
+2. [Assembling the wheelchair](#2-Assembling-the-Wheelchair)
+3. [Libraries](#3-Libraries)
+4. [Code](#4-Code)
+5. [Wiring](#5-Wiring)
+6. [Poster](#6-Poster)
 
-### Components
+
+## 1 Components
 - Any Wheelchair
 - Two pieces of thin ply wood
 - +- 1 meter of velcro
-- +- 6 tie-wraps
+- +- 6 cable ties
 - Tape
 - 1 Raspberry Pi
 - 1 Adafruit bluefruit feather
@@ -16,14 +22,14 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 - 1 Big Powerbank
 - 10 male to male jumper wires
 - 1 vibration motor
-- 2 rgb LED's
+- 2 Neopixel LEDs
 - 2 condensators
-- 2 resistors of 350kΩ
+- 2 resistors of 470Ω
 
-### Assembling the wheelchair
-By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a powerbank. The feather is attached to the wheel with its separate powerbank. By using tie wraps and tape, these parts are added on the wheelchair.
+## 2 Assembling the wheelchair
+By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. The feather and a small powerbank are attached to a spoke of the wheel to detect the rotation. Use cable ties and tape to fix these components to the wheelchair.
 
-### Libraries
+## 3 Libraries
 The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
 
 
@@ -44,6 +50,7 @@ from dcd.entities.property_type import PropertyType
 ```
 
 #### On Feather:
+
 ```C
 #include <Arduino.h>
 #include <SPI.h>
@@ -64,12 +71,24 @@ from dcd.entities.property_type import PropertyType
 #include "BluefruitConfig.h"
 ```
 
-### Code
+#### On Arduino:
+Download Adafruit Neopixel library to control the LEDs.
+
+```C
+#include <Adafruit_NeoPixel.h>
+```
+
+
+## 4 Code
 This code needs to run on the Raspberry pi:
 
 
-### Wiring
+## 5 Wiring
 
 ![](images/wheelchair_madness.jpg)
 
 https://www.tinkercad.com/things/7NosIb3B7m8-stunning-blad/editel?tenant=circuits?sharecode=-iT8iiwYHXB-MzWQWOSuqNqyqwceIcqcFFds_0Dsx5k=
+
+## 6 Poster
+
+![](images/Poster-IOT.jpeg)
