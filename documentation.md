@@ -11,20 +11,20 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 
 ## 1 Components
 - Any Wheelchair
-- Two pieces of thin ply wood
-- +- 1 meter of velcro
-- +- 6 cable ties
+- Two Pieces of Thin Ply Wood
+- +- 1 Meter of Velcro
+- +- 6 Cable Ties
 - Tape
 - 1 Raspberry Pi
-- 1 Adafruit bluefruit feather
-- 1 Arduino mega
+- 1 Adafruit Bluefruit Feather
+- 1 Arduino Mega 2560
 - 1 Small Powerbank
 - 1 Big Powerbank
-- 10 male to male jumper wires
-- 1 vibration motor
+- +- 10 male to male jumper wires
+- 1 Vibration Motor
 - 2 Neopixel LEDs
-- 2 condensators
-- 2 resistors of 470Ω
+- 2 Condensators
+- 2 Resistors of 470Ω
 
 ## 2 Assembling the wheelchair
 By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. The feather and a small powerbank are attached to a spoke of the wheel to detect the rotation. Use cable ties and tape to fix these components to the wheelchair.
