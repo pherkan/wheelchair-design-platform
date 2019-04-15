@@ -343,12 +343,11 @@ void loop() {
 ```
 
 ## 6 Wiring
-
-## 7 Wiring
 Wiring Arduino uno, vibration motor and two RGB LEDs
 ![](images/wheelchair_madness.jpg)
 Wiring
 
-## 8 Poster
+## 7 Poster
+The poster below shows an overview of the project. Although this project only implemented the IMU Sensor, LED Lights and a vibration motor, the poster shows the use of an extra IMU Sensor and the gesture sensor. Therefore the data flow shows that the user can move forward, backward, to the left and right. In the code given above it is only possible to let the user move forward and backward.
 
 ![](images/Poster-IOT.jpeg)
