@@ -26,10 +26,10 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 - 2 Condensators
 - 2 Resistors of 470Ω
 
-## 3 Assembling the wheelchair
+## 2. Assembling the wheelchair
 By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. The feather and a small powerbank are attached to a spoke of the wheel to detect the rotation. Use cable ties and tape to fix these components to the wheelchair.
 
-## 4 Libraries
+## 3. Libraries
 The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
 
 
@@ -79,7 +79,7 @@ Download Adafruit Neopixel library to control the LEDs.
 ```
 
 
-## 5 Code
+## 4. Code
 
 ### 4.1. Code for Raspberry Pi
 This code needs to run on the Raspberry pi:
@@ -451,7 +451,7 @@ void loop(void) {
 ```
 
 ### 4.3. Code for Arduino Mega
-This code enabled Arduino Mega to receive signals from Raspberry Pi through its serial port and actuates 2 LED lights and the vibration motor. 
+This code enabled Arduino Mega to receive signals from Raspberry Pi through its serial port and actuates 2 LED lights and the vibration motor.
 ```C
 #include <Adafruit_NeoPixel.h> // Necessary Library include
 
@@ -459,8 +459,8 @@ This code enabled Arduino Mega to receive signals from Raspberry Pi through its 
 #define LED_PIN2 7
 #define VIB_PIN A10
 
-Adafruit_NeoPixel LED_controller1 = Adafruit_NeoPixel( 1, LED_PIN1, NEO_RGB + NEO_KHZ800); 
-Adafruit_NeoPixel LED_controller2 = Adafruit_NeoPixel( 1, LED_PIN2, NEO_RGB + NEO_KHZ800); 
+Adafruit_NeoPixel LED_controller1 = Adafruit_NeoPixel( 1, LED_PIN1, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel LED_controller2 = Adafruit_NeoPixel( 1, LED_PIN2, NEO_RGB + NEO_KHZ800);
 
 int i = 127;
 uint8_t R = 0, G = 0, B = 0; // Unsigned integer with 8 bits
@@ -482,7 +482,7 @@ void setup() {
 }
 
 void loop() {
-  
+
   LED_controller1.show(); // Sending updated pixel color to the hardware
   LED_controller2.show(); // Sending updated pixel color to the hardware
 
@@ -529,9 +529,9 @@ void loop() {
         LED_controller2.setPixelColor( 0, 0xFFFFFF);
         LED_controller1.show();
         LED_controller2.show();
-        
+
       }
-    
+
     }
 }
 ```
