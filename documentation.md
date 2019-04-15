@@ -50,7 +50,7 @@ The following libraries need to be installed in order to successfully run the co
 
 <details><summary>Python libraries</summary>
 <p>
-```python
+```C
 import pygatt  # To access BLE GATT support
 import signal  # To catch the Ctrl+C and end the program properly
 import os  # To access environment variables
