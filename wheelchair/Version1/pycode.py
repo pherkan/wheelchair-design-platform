@@ -33,8 +33,11 @@ RECOMMENDED_NUM_ROTATION = 1
 
 # Did we already nudged
 nudged = False
+
+# points are used to keep track of the amount of correctly executed movements
 points = 0
 
+# the first value is saved to be used as starting point
 first_values = [0,0]
 is_first_value = True
 
@@ -63,25 +66,15 @@ def handle_rotation_data(handle, value_bytes):
     rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
     find_or_create("dance",
                    PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
-    # print("rotation values:", rotation_values)
-    check_movement(rotation_values)
 
-    # end part example code
-    # if rotation_values[0] > RECOMMENDED_NUM_ROTATION and not nudged:
-    #     ser.write('1'.encode())
-    #     time.sleep(2)
-    #     ser.write('0'.encode())
-    #     # global nudged
-    #     nudged = True
+    # this function generates a random movement and checks if the user completed the movement
+    check_movement(rotation_values)
 
 def keyboard_interrupt_handler(signal_num):
     """Make sure we close our program properly"""
     print("Exiting...".format(signal_num))
     left_wheel.unsubscribe(GATT_CHARACTERISTIC_ROTATION)
     exit(0)
-
-# Own code
-# Save first orientation value
 
 def check_movement(rotation_values):
     global is_first_value, first_values, points
@@ -90,54 +83,46 @@ def check_movement(rotation_values):
         first_values = rotation_values
         random_movement = random.randint(0,1)
         is_first_value = False
-        print(first_values)
 
     # Start movements
     global random_movement
-    print("movement nr: ", random_movement)
-    # print ("rotation value:", rotation_values)
     dif_forward = rotation_values[0]-first_values[0]
     dif_reverse = rotation_values[1]-first_values[1]
-    print("rotation value minus start values:", dif_forward, dif_reverse)
-
-    # # Send movement to Arduino to activate actuators
-    # ser.write(random_movement)
-    # time.sleep(2)
-
-    print("RV[0]", rotation_values[0])
-    print("RV[1]", rotation_values[1])
-    print("RVfirst[0]", first_values[0])
-    print("RVfirst[1]", first_values[1])
 
     # Check if user has made the right movement
     if random_movement == 0:
+        # tell the user what move to make:
         print("move FORWARD")
+        # send sign to the arduino via serial to turn both LED's green
         ser.write('0'.encode())
+        # if rotation reached threshhold:
         if (dif_forward) > RECOMMENDED_NUM_ROTATION:
+            # send sign to arduino to turn on vibration motor for 2 seconds
             ser.write('4'.encode())
             time.sleep(2)
             global points
             points+=1
+            # set current values as starting point of next movement
             first_values = rotation_values
-            # global first_values_orientation
-            # global orientation_values
-            # first_values_orientation = orientation_values
+            # generate new random movement
             random_movement = random.randint(0,1)
 
     elif random_movement == 1:
+        # tell the user what move to make:
         print ("move BACKWARD")
+        # send the sign to the arduino via serial to turn both LED's red
         ser.write('1'.encode())
+        # if rotation reached threshhold:
         if (dif_reverse) > RECOMMENDED_NUM_ROTATION:
+            # send sign to arduino to turn on vibration motor for 2 seconds
             ser.write('4'.encode())
             time.sleep(2)
             global points
             points+=1
+            # set current values as starting point of next movement
             first_values = rotation_values
-            # global first_values_orientation
-            # global orientation_values
-            # first_values_orientation = orientation_values
+            # generate new random movement
             random_movement = random.randint(0,1)
-            # End own code
 
     else :
         exit(0)
