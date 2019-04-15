@@ -92,8 +92,6 @@ from dcd.entities.property_type import PropertyType
 
 <details><summary>Arduino Libraries</summary>
 <p>
-Download Adafruit Neopixel library to control the LEDs.
-
 ```C
 #include <Adafruit_NeoPixel.h>
 ```
@@ -103,7 +101,6 @@ Download Adafruit Neopixel library to control the LEDs.
 ## 5 Code
 <details><summary>Code for Raspberry pi</summary>
 <p>
-
 ```python
 #!/usr/bin/env python3
 
@@ -258,6 +255,7 @@ signal.signal(signal.SIGINT, keyboard_interrupt_handler)
 ```
 </p>
 </details>
+
 ### 5.2. Code for Adafruit Bluefruit feather
 
 <details><summary>Arduino mega code:</summary>
