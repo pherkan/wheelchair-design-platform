@@ -343,9 +343,16 @@ void loop() {
 ```
 
 ## 6 Wiring
-Wiring Arduino uno, vibration motor and two RGB LEDs
+
+### 6.1. Wiring for Arduino Mega
+
+Wire Arduino Mega with two Neopixel leds and one vibration motor
 ![](images/wheelchair_madness.jpg)
-Wiring
+
+### 6.2. Wiring for Adafruit Bluefruit Feather
+
+Wire Feather with IMU Sensor (Adafruit_BNO055)
+![](images/feather.jpg)
 
 ## 7 Poster
 The poster below shows an overview of the project. Although this project only implemented the IMU Sensor, LED Lights and a vibration motor, the poster shows the use of an extra IMU Sensor and the gesture sensor. Therefore the data flow shows that the user can move forward, backward, to the left and right. In the code given above it is only possible to let the user move forward and backward.
