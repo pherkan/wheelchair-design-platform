@@ -49,8 +49,10 @@ The feather + small breadboard and a small powerbank are attached to a spoke of 
 The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
 
 <details><summary>Python libraries</summary>
+
 <p>
-```C
+
+```python
 import pygatt  # To access BLE GATT support
 import signal  # To catch the Ctrl+C and end the program properly
 import os  # To access environment variables
@@ -64,6 +66,7 @@ from dcd.entities.thing import Thing
 from dcd.entities.property_type import PropertyType
 ```
 </p>
+
 </details>
 
 <details><summary>Feather Libraries</summary>
