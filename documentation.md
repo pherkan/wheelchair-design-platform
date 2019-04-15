@@ -2,7 +2,7 @@
 In this document the functioning of the Internet-connected Wheelchair called Dance Wheelchair will be explained. This internet-connected wheelchair lets wheelchair users dance in the same way that is being done at a gaming arcade hall. Just as the game screen shows different arrow keys for people to step on the dance platform, LED light signals of Dance Wheelchair  guide the user which direction to move, giving her/him cues to choreograph the dance. If the user moves correctly, she/he is notified with brief vibration and gets next dance cue from the LED lights. In this way, people on a wheelchair can enjoy their own DANCE DANCE REVOLUTION!
 
 1. [Components/Hardware](#1-Components/Hardware)
-2. [Software] (#2-Software)
+2. [Software](#2-Software)
 3. [Assembling the wheelchair](#3-Assembling-the-Wheelchair)
 4. [Libraries](#4-Libraries)
 5. [Code](#5-Code)
