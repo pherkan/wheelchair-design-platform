@@ -70,7 +70,9 @@ from dcd.entities.property_type import PropertyType
 </details>
 
 <details><summary>Feather Libraries</summary>
+
 <p>
+
 ```C
 #include <Arduino.h>
 #include <SPI.h>
@@ -90,20 +92,28 @@ from dcd.entities.property_type import PropertyType
 
 #include "BluefruitConfig.h"
 ```
+
 </p>
+
 </details>
 
 <details><summary>Arduino Libraries</summary>
+
 <p>
+
 ```C
 #include <Adafruit_NeoPixel.h>
 ```
+
 </p>
+
 </details>
 
 ## 5 Code
 <details><summary>Code for Raspberry pi</summary>
+
 <p>
+
 ```python
 #!/usr/bin/env python3
 
@@ -256,14 +266,19 @@ left_wheel.subscribe(GATT_CHARACTERISTIC_ROTATION, callback=handle_rotation_data
 signal.signal(signal.SIGINT, keyboard_interrupt_handler)
 
 ```
+
 </p>
+
 </details>
 
 ### 5.2. Code for Adafruit Bluefruit feather
 
 <details><summary>Arduino mega code:</summary>
+
 <p>
+
 This code enabled Arduino Mega to receive signals from Raspberry Pi through its serial port and actuates 2 LED lights and the vibration motor.
+
 ```C
 #include <Adafruit_NeoPixel.h> // Necessary Library include
 
@@ -347,7 +362,9 @@ void loop() {
     }
 }
 ```
+
 </p>
+
 </details>
 
 ## 6 Wiring
