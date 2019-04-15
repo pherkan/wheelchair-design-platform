@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
 # In this example, we connect to a GATT service 'rotation' on the wheel, sending
-# the rotation count over time. When we reach the recommended number of rotation,
-# we send a command to the Arduino to turn on the vibration motors.
+# the rotation count over time. We create a random movement which needs to be executed by the user.
+# When we reach the recommended number of rotations,
+# we send a command to the Arduino to turn on the vibration motors for 2 seconds and to
+# color the LED's correctly for the next movement.
+# This code is based on the example code created by Jacky 
 
 # Import required library
 import pygatt  # To access BLE GATT support
@@ -25,6 +28,7 @@ BLUETOOTH_DEVICE_MAC = os.environ['BLUETOOTH_DEVICE_MAC']
 
 # UUID of the GATT characteristic to subscribe
 GATT_CHARACTERISTIC_ROTATION = "02118733-4455-6677-8899-AABBCCDDEEFF"
+
 # Many devices, e.g. Fitbit, use random addressing, this is required to connect.
 ADDRESS_TYPE = pygatt.BLEAddressType.random
 
