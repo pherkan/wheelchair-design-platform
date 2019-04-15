@@ -256,9 +256,10 @@ signal.signal(signal.SIGINT, keyboard_interrupt_handler)
 </p>
 </details>
 
-### 5.2. Code for Adafruit Bluefruit feather
+### 5.2. Code for Arduino Mega
 
 <details><summary>Arduino mega code:</summary>
+(../wheelchair/Version1/arduino_led_vib/arduino_led_vib.ino)
 <p>
 This code enabled Arduino Mega to receive signals from Raspberry Pi through its serial port and actuates 2 LED lights and the vibration motor.
 ```C
@@ -346,6 +347,9 @@ void loop() {
 ```
 </p>
 </details>
+
+### 5.3. Code for Adafruit Bluefruit Feather
+
 
 ## 6 Wiring
 
