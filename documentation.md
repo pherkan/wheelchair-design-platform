@@ -1,16 +1,6 @@
 # Dance Wheelchair
 In this document the functioning of the Internet-connected Wheelchair called Dance Wheelchair will be explained. This internet-connected wheelchair lets wheelchair users dance in the same way that is being done at a gaming arcade hall. Just as the game screen shows different arrow keys for people to step on the dance platform, LED light signals of Dance Wheelchair  guide the user which direction to move, giving her/him cues to choreograph the dance. If the user moves correctly, she/he is notified with brief vibration and gets next dance cue from the LED lights. In this way, people on a wheelchair can enjoy their own DANCE DANCE REVOLUTION!
 
-<<<<<<< HEAD
-1. [Components](#1-Components)
-2. [Assembling the wheelchair](#2-Assembling-the-Wheelchair)
-3. [Libraries](#3-Libraries)
-4. [Code](#4-Code)
-5. [Wiring](#5-Wiring)
-6. [Poster](#6-Poster)
-
-## 1 Components
-=======
 1. [Components/Hardware](#1-Components/Hardware)
 2. [Software](#2-Software)
 3. [Assembling the wheelchair](#3-Assembling-the-Wheelchair)
@@ -21,7 +11,6 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 
 
 ## 1. Components/Hardware
->>>>>>> b46d1f8887d4e471581ea15cb3a504a178a8cdac
 - Any Wheelchair
 - Two Pieces of Thin Ply Wood
 - +- 1 Meter of Velcro
@@ -40,22 +29,23 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 - 2 Condensators
 - 2 Resistors of 470Ω
 
-## 2 Assembling the wheelchair
+## 2 Software
+Software used for this course:
+1. Atom
+2. Arduino IDE
+3. Terminal (macOS): Connecting to the Raspberry Pi without monitor
+4. Github: Team documentation
+5. DCD Hub: Grafana
+6. Raspbian ([downoad here](https://www.raspberrypi.org/downloads/raspbian/))
+7. Etcher: To flash the Raspberry Pi
+
+
+## 3 Assembling the wheelchair
 By using two pieces of plywood and applying these to the frame of the wheelchair, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. For your own convenience: Make sure to attach the plywood to the frame in a way that the wheelchair is still foldable.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-The feather + small breadboard and a small powerbank are attached to a spoke of the wheel to detect the rotation. First check part 5 to wire the feather correctly on the small breadboard. Check part 4 for the code to flash on the feather. If the wiring is correct and the right code flashed, you can use cable ties and tape to fix these components to the wheelchair.
-=======
-## 3. Assembling the wheelchair
-By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. The feather and a small powerbank are attached to a spoke of the wheel to detect the rotation. Use cable ties and tape to fix these components to the wheelchair. The assembly of the wiring can be found [here](#6-Wiring) whereas an overview of the wheelchair with its components can be found here (#7-Poster).
->>>>>>> b46d1f8887d4e471581ea15cb3a504a178a8cdac
-=======
-## 3. Assembling The Wheelchair
-By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. The feather and a small powerbank are attached to a spoke of the wheel to detect the rotation. Use cable ties and tape to fix these components to the wheelchair. The assembly of the wiring can be found [here](#6-Wiring) whereas an overview of the wheelchair with its components can be found [here](#7-Poster).
->>>>>>> 3f523b2a0a03f76fef765fa6e6b7f05c5032eabe
+The feather + small breadboard and a small powerbank are attached to a spoke of the wheel to detect the rotation. First check part 5 [here](#6-Wiring) to wire the feather correctly on the small breadboard. Check part 4 for the code to flash on the feather. If the wiring is correct and the right code flashed, you can use cable ties and tape to fix these components to the wheelchair. The assembly of the wiring can be found [here](#6-Wiring) whereas an overview of the wheelchair with its components can be found [here](#7-Poster).
 
-## 3 Libraries
+## 4 Libraries
 The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
 
 #### In python on Raspberry pi: ####
@@ -102,18 +92,172 @@ Download Adafruit Neopixel library to control the LEDs.
 #include <Adafruit_NeoPixel.h>
 ```
 
-## 4 Code
+## 5 Code
 
-### 4.1. Code for Raspberry Pi
-This code needs to run on the Raspberry pi:
+### 5.1. Code for Raspberry Pi
 
-### 4.2. Code for Adafruit Bluefruit feather
+<details><summary>This code needs to run on the Raspberry pi:</summary>
+<p>
 
-### 4.3. Code for Arduino Mega
+```python
+#!/usr/bin/env python3
+
+# In this example, we connect to a GATT service 'rotation' on the wheel, sending
+# the rotation count over time. We create a random movement which needs to be executed by the user.
+# When we reach the recommended number of rotations,
+# we send a command to the Arduino to turn on the vibration motors for 2 seconds and to
+# color the LED's correctly for the next movement.
+# This code is based on the example code created by Jacky
+
+# Import required library
+import pygatt  # To access BLE GATT support
+import signal  # To catch the Ctrl+C and end the program properly
+import os  # To access environment variables
+from dotenv import load_dotenv  # To load environment variables from .env file
+import serial
+import time
+import random
+
+# DCD Hub
+from dcd.entities.thing import Thing
+from dcd.entities.property_type import PropertyType
+
+# The thing ID and access token
+load_dotenv()
+THING_ID = os.environ['THING_ID']
+THING_TOKEN = os.environ['THING_TOKEN']
+BLUETOOTH_DEVICE_MAC = os.environ['BLUETOOTH_DEVICE_MAC']
+
+# UUID of the GATT characteristic to subscribe
+GATT_CHARACTERISTIC_ROTATION = "02118733-4455-6677-8899-AABBCCDDEEFF"
+
+# Many devices, e.g. Fitbit, use random addressing, this is required to connect.
+ADDRESS_TYPE = pygatt.BLEAddressType.random
+
+# Recommended number of rotation
+RECOMMENDED_NUM_ROTATION = 1
+
+# Did we already nudged
+nudged = False
+
+# points are used to keep track of the amount of correctly executed movements
+points = 0
+
+# the first value is saved to be used as starting point
+first_values = [0,0]
+is_first_value = True
+
+# Start reading the serial port
+ser = serial.Serial(
+    port = os.environ['SERIAL'],
+    baudrate = 9600,
+    timeout = 2)
+
+
+def find_or_create(property_name, property_type):
+    """Search a property by name, create it if not found, then return it."""
+    if my_thing.find_property_by_name(property_name) is None:
+        my_thing.create_property(name=property_name,
+                                 property_type=property_type)
+    return my_thing.find_property_by_name(property_name)
+
+
+def handle_rotation_data(handle, value_bytes):
+    """
+    handle -- integer, characteristic read handle the data was received on
+    value_bytes -- bytearray, the data returned in the notification
+    """
+    print("Received data: %s (handle %d)" % (str(value_bytes), handle))
+
+    rotation_values = [float(x) for x in value_bytes.decode('utf-8').split(",")]
+    find_or_create("dance",
+                   PropertyType.TWO_DIMENSIONS).update_values(rotation_values)
+
+    # this function generates a random movement and checks if the user completed the movement
+    check_movement(rotation_values)
+
+def keyboard_interrupt_handler(signal_num):
+    """Make sure we close our program properly"""
+    print("Exiting...".format(signal_num))
+    left_wheel.unsubscribe(GATT_CHARACTERISTIC_ROTATION)
+    exit(0)
+
+def check_movement(rotation_values):
+    global is_first_value, first_values, points
+    print("point count:", points)
+    if is_first_value == True:
+        first_values = rotation_values
+        random_movement = random.randint(0,1)
+        is_first_value = False
+
+    # Start movements
+    global random_movement
+    dif_forward = rotation_values[0]-first_values[0]
+    dif_reverse = rotation_values[1]-first_values[1]
+
+    # Check if user has made the right movement
+    if random_movement == 0:
+        # tell the user what move to make:
+        print("move FORWARD")
+        # send sign to the arduino via serial to turn both LED's green
+        ser.write('0'.encode())
+        # if rotation reached threshhold:
+        if (dif_forward) > RECOMMENDED_NUM_ROTATION:
+            # send sign to arduino to turn on vibration motor for 2 seconds
+            ser.write('4'.encode())
+            time.sleep(2)
+            global points
+            points+=1
+            # set current values as starting point of next movement
+            first_values = rotation_values
+            # generate new random movement
+            random_movement = random.randint(0,1)
+
+    elif random_movement == 1:
+        # tell the user what move to make:
+        print ("move BACKWARD")
+        # send the sign to the arduino via serial to turn both LED's red
+        ser.write('1'.encode())
+        # if rotation reached threshhold:
+        if (dif_reverse) > RECOMMENDED_NUM_ROTATION:
+            # send sign to arduino to turn on vibration motor for 2 seconds
+            ser.write('4'.encode())
+            time.sleep(2)
+            global points
+            points+=1
+            # set current values as starting point of next movement
+            first_values = rotation_values
+            # generate new random movement
+            random_movement = random.randint(0,1)
+
+    else :
+        exit(0)
+
+# Instantiate a thing with its credential, then read its properties from the DCD Hub
+my_thing = Thing(thing_id=THING_ID, token=THING_TOKEN)
+my_thing.read()
+
+# Start a BLE adapter
+bleAdapter = pygatt.GATTToolBackend()
+bleAdapter.start()
+
+# Use the BLE adapter to connect to our device
+left_wheel = bleAdapter.connect(BLUETOOTH_DEVICE_MAC, address_type=ADDRESS_TYPE, timeout = 100.0)
+
+# Subscribe to the GATT services
+left_wheel.subscribe(GATT_CHARACTERISTIC_ROTATION, callback=handle_rotation_data)
+
+# Register our Keyboard handler to exit
+signal.signal(signal.SIGINT, keyboard_interrupt_handler)
+
+```
+</p>
+</details>
+### 5.2. Code for Adafruit Bluefruit feather
+
+### 5.3. Code for Arduino Mega
 This code enabled Arduino Mega to receive signals from Raspberry Pi through its serial port and actuates 2 LED lights and the vibration motor.
-<<<<<<< HEAD
 
-=======
 ```C
 #include <Adafruit_NeoPixel.h> // Necessary Library include
 
@@ -198,16 +342,13 @@ void loop() {
 }
 ```
 
-
-
 ## 6 Wiring
->>>>>>> b46d1f8887d4e471581ea15cb3a504a178a8cdac
 
-## 5 Wiring
+## 7 Wiring
 Wiring Arduino uno, vibration motor and two RGB LEDs
 ![](images/wheelchair_madness.jpg)
-Wiring 
+Wiring
 
-## 6 Poster
+## 8 Poster
 
 ![](images/Poster-IOT.jpeg)
