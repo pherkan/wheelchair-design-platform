@@ -48,7 +48,6 @@ The feather + small breadboard and a small powerbank are attached to a spoke of 
 ## 4 Libraries
 The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
 
-#### In python on Raspberry pi: ####
 <details><summary>Python libraries</summary>
 <p>
 ```python
@@ -66,8 +65,6 @@ from dcd.entities.property_type import PropertyType
 ```
 </p>
 </details>
-
-#### On Feather:
 
 <details><summary>Feather Libraries</summary>
 <p>
@@ -93,7 +90,6 @@ from dcd.entities.property_type import PropertyType
 </p>
 </details>
 
-#### On Arduino:
 <details><summary>Arduino Libraries</summary>
 <p>
 Download Adafruit Neopixel library to control the LEDs.
@@ -103,11 +99,9 @@ Download Adafruit Neopixel library to control the LEDs.
 ```
 </p>
 </details>
-## 5 Code ##
 
-### 5.1. Code for Raspberry Pi
-
-<details><summary>This code needs to run on the Raspberry pi:</summary>
+## 5 Code
+<details><summary>Code for Raspberry pi</summary>
 <p>
 
 ```python
@@ -266,10 +260,9 @@ signal.signal(signal.SIGINT, keyboard_interrupt_handler)
 </details>
 ### 5.2. Code for Adafruit Bluefruit feather
 
-### 5.3. Code for Arduino Mega
-This code enabled Arduino Mega to receive signals from Raspberry Pi through its serial port and actuates 2 LED lights and the vibration motor.
-<details><summary>Arduino code:</summary>
+<details><summary>Arduino mega code:</summary>
 <p>
+This code enabled Arduino Mega to receive signals from Raspberry Pi through its serial port and actuates 2 LED lights and the vibration motor.
 ```C
 #include <Adafruit_NeoPixel.h> // Necessary Library include
 
