@@ -1,15 +1,16 @@
 # Dance Wheelchair
 In this document the functioning of the Internet-connected Wheelchair called Dance Wheelchair will be explained. This internet-connected wheelchair lets wheelchair users dance in the same way that is being done at a gaming arcade hall. Just as the game screen shows different arrow keys for people to step on the dance platform, LED light signals of Dance Wheelchair  guide the user which direction to move, giving her/him cues to choreograph the dance. If the user moves correctly, she/he is notified with brief vibration and gets next dance cue from the LED lights. In this way, people on a wheelchair can enjoy their own DANCE DANCE REVOLUTION!
 
-1. [Components](#1-Components)
-2. [Assembling the wheelchair](#2-Assembling-the-Wheelchair)
-3. [Libraries](#3-Libraries)
-4. [Code](#4-Code)
-5. [Wiring](#5-Wiring)
-6. [Poster](#6-Poster)
+1. [Components/Hardware](#1-Components/Hardware)
+2. [Software] (#2-Software)
+3. [Assembling the wheelchair](#3-Assembling-the-Wheelchair)
+4. [Libraries](#4-Libraries)
+5. [Code](#5-Code)
+6. [Wiring](#6-Wiring)
+7. [Poster](#7-Poster)
 
 
-## 1. Components
+## 1. Components/Hardware
 - Any Wheelchair
 - Two Pieces of Thin Ply Wood
 - +- 1 Meter of Velcro
@@ -26,10 +27,16 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 - 2 Condensators
 - 2 Resistors of 470Ω
 
-## 2. Assembling the wheelchair
+## 2. Software
+Software used for this course:
+1. Atom
+2. Arduino IDE
+3. Terminal (macOS)
+
+## 3. Assembling the wheelchair
 By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. The feather and a small powerbank are attached to a spoke of the wheel to detect the rotation. Use cable ties and tape to fix these components to the wheelchair.
 
-## 3. Libraries
+## 4. Libraries
 The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
 
 
@@ -79,9 +86,9 @@ Download Adafruit Neopixel library to control the LEDs.
 ```
 
 
-## 4. Code
+## 5. Code
 
-### 4.1. Code for Raspberry Pi
+### 5.1. Code for Raspberry Pi
 This code needs to run on the Raspberry pi:
 
 ```C
@@ -232,7 +239,7 @@ left_wheel.subscribe(GATT_CHARACTERISTIC_ROTATION, callback=handle_rotation_data
 signal.signal(signal.SIGINT, keyboard_interrupt_handler)
 ```
 
-### 4.2. Code for Adafruit Bluefruit feather
+### 5.2. Code for Adafruit Bluefruit feather
 This code needs to run on the Raspberry pi:
 
 ```C
@@ -450,7 +457,7 @@ void loop(void) {
 }
 ```
 
-### 4.3. Code for Arduino Mega
+### 5.3. Code for Arduino Mega
 This code enabled Arduino Mega to receive signals from Raspberry Pi through its serial port and actuates 2 LED lights and the vibration motor.
 ```C
 #include <Adafruit_NeoPixel.h> // Necessary Library include
@@ -538,13 +545,15 @@ void loop() {
 
 
 
-## 5 Wiring
+## 6 Wiring
 
 ![](images/wheelchair_madness.jpg)
 
 https://www.tinkercad.com/things/7NosIb3B7m8-stunning-blad/editel?tenant=circuits?sharecode=-iT8iiwYHXB-MzWQWOSuqNqyqwceIcqcFFds_0Dsx5k=
 
-## 6 Poster
+
+
+## 7 Poster
 The poster below shows an overview of the project. Although this project only implemented the IMU Sensor, LED Lights and a vibration motor, the poster shows the use of an extra IMU Sensor and the gesture sensor.
 Therefore the data flow shows that the user can move forward, backward, to the left and right. In the code given above it is only possible to let the user move forward and backward.
 
