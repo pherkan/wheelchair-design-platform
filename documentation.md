@@ -44,11 +44,16 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 By using two pieces of plywood and applying these to the frame of the wheelchair, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. For your own convenience: Make sure to attach the plywood to the frame in a way that the wheelchair is still foldable.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 The feather + small breadboard and a small powerbank are attached to a spoke of the wheel to detect the rotation. First check part 5 to wire the feather correctly on the small breadboard. Check part 4 for the code to flash on the feather. If the wiring is correct and the right code flashed, you can use cable ties and tape to fix these components to the wheelchair.
 =======
 ## 3. Assembling the wheelchair
 By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. The feather and a small powerbank are attached to a spoke of the wheel to detect the rotation. Use cable ties and tape to fix these components to the wheelchair. The assembly of the wiring can be found [here](#6-Wiring) whereas an overview of the wheelchair with its components can be found here (#7-Poster).
 >>>>>>> b46d1f8887d4e471581ea15cb3a504a178a8cdac
+=======
+## 3. Assembling The Wheelchair
+By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. The feather and a small powerbank are attached to a spoke of the wheel to detect the rotation. Use cable ties and tape to fix these components to the wheelchair. The assembly of the wiring can be found [here](#6-Wiring) whereas an overview of the wheelchair with its components can be found [here](#7-Poster).
+>>>>>>> 3f523b2a0a03f76fef765fa6e6b7f05c5032eabe
 
 ## 3 Libraries
 The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
