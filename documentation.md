@@ -545,5 +545,7 @@ void loop() {
 https://www.tinkercad.com/things/7NosIb3B7m8-stunning-blad/editel?tenant=circuits?sharecode=-iT8iiwYHXB-MzWQWOSuqNqyqwceIcqcFFds_0Dsx5k=
 
 ## 6 Poster
+The poster below shows an overview of the project. Although this project only implemented the IMU Sensor, LED Lights and a vibration motor, the poster shows the use of an extra IMU Sensor and the gesture sensor.
+Therefore the data flow shows that the user can move forward, backward, to the left and right. In the code given above it is only possible to let the user move forward and backward.
 
 ![](images/Poster-IOT.jpeg)
