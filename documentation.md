@@ -462,9 +462,9 @@ This code enabled Arduino Mega to receive signals from Raspberry Pi through its 
 ```C
 #include <Adafruit_NeoPixel.h> // Necessary Library include
 
-#define LED_PIN1 2 // Defining the pin of the arduino that sends the data stream.
-#define LED_PIN2 7
-#define VIB_PIN A10
+#define LED_PIN1 2 // Defining the left LED
+#define LED_PIN2 7 // Defining the right LED
+#define VIB_PIN A10 // Defining Vibration Motor
 
 Adafruit_NeoPixel LED_controller1 = Adafruit_NeoPixel( 1, LED_PIN1, NEO_RGB + NEO_KHZ800);
 Adafruit_NeoPixel LED_controller2 = Adafruit_NeoPixel( 1, LED_PIN2, NEO_RGB + NEO_KHZ800);
@@ -477,15 +477,14 @@ bool left_red = false;
 bool right_red = false;
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600); //Set serial to 9600 baud
   pinMode(VIB_PIN, OUTPUT);
-  LED_controller1.begin(); // We're starting up the library
-  LED_controller2.begin(); // We're starting up the library
+  LED_controller1.begin(); // We're starting up the library for the left LED
+  LED_controller2.begin(); // We're starting up the library for the right LED
 
   LED_controller1.setPixelColor( 0, 0x008000);
   LED_controller2.setPixelColor( 0, 0x008000);
-  // Red = 0xFF0000 Green = 0x008000
+  // Red = 0xFF0000 and Green = 0x008000
 }
 
 void loop() {
@@ -498,39 +497,40 @@ void loop() {
 //  int inByte = Serial.read();
 
     switch (command) {
-      //forward
+      // user needs to go forward
       case '0' :
         LED_controller1.setPixelColor( 0, 0x008000);
         LED_controller2.setPixelColor( 0, 0x008000);
         LED_controller1.show();
         LED_controller2.show();
         break;
-      //backward
+      //user needs to go backward
       case '1' :
         LED_controller1.setPixelColor( 0, 0xFF0000);
         LED_controller2.setPixelColor( 0, 0xFF0000);
         LED_controller1.show();
         LED_controller2.show();
         break;
-      //right
+      //user needs to go right
       case '2' :
         LED_controller1.setPixelColor( 0, 0xFF0000);
         LED_controller2.setPixelColor( 0, 0x008000);
         LED_controller1.show();
         LED_controller2.show();
         break;
-      //left
+      //user needs to go left
       case '3' :
         LED_controller1.setPixelColor( 0, 0x008000);
         LED_controller2.setPixelColor( 0, 0xFF0000);
         LED_controller1.show();
         LED_controller2.show();
         break;
-      //vibration
+      //Vibrate the motor
       case '4' :
         analogWrite(VIB_PIN, 153);
         delay(2000);
         analogWrite(VIB_PIN, 0);
+        // Add a default state that makes sure the LED lights are shining white.
       default:
         LED_controller1.setPixelColor( 0, 0xFFFFFF);
         LED_controller2.setPixelColor( 0, 0xFFFFFF);
