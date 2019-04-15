@@ -1,6 +1,7 @@
 # Dance Wheelchair
 In this document the functioning of the Internet-connected Wheelchair called Dance Wheelchair will be explained. This internet-connected wheelchair lets wheelchair users dance in the same way that is being done at a gaming arcade hall. Just as the game screen shows different arrow keys for people to step on the dance platform, LED light signals of Dance Wheelchair  guide the user which direction to move, giving her/him cues to choreograph the dance. If the user moves correctly, she/he is notified with brief vibration and gets next dance cue from the LED lights. In this way, people on a wheelchair can enjoy their own DANCE DANCE REVOLUTION!
 
+<<<<<<< HEAD
 1. [Components](#1-Components)
 2. [Assembling the wheelchair](#2-Assembling-the-Wheelchair)
 3. [Libraries](#3-Libraries)
@@ -9,6 +10,18 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 6. [Poster](#6-Poster)
 
 ## 1 Components
+=======
+1. [Components/Hardware](#1-Components/Hardware)
+2. [Software](#2-Software)
+3. [Assembling the wheelchair](#3-Assembling-the-Wheelchair)
+4. [Libraries](#4-Libraries)
+5. [Code](#5-Code)
+6. [Wiring](#6-Wiring)
+7. [Poster](#7-Poster)
+
+
+## 1. Components/Hardware
+>>>>>>> b46d1f8887d4e471581ea15cb3a504a178a8cdac
 - Any Wheelchair
 - Two Pieces of Thin Ply Wood
 - +- 1 Meter of Velcro
@@ -30,7 +43,12 @@ In this document the functioning of the Internet-connected Wheelchair called Dan
 ## 2 Assembling the wheelchair
 By using two pieces of plywood and applying these to the frame of the wheelchair, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. For your own convenience: Make sure to attach the plywood to the frame in a way that the wheelchair is still foldable.
 
+<<<<<<< HEAD
 The feather + small breadboard and a small powerbank are attached to a spoke of the wheel to detect the rotation. First check part 5 to wire the feather correctly on the small breadboard. Check part 4 for the code to flash on the feather. If the wiring is correct and the right code flashed, you can use cable ties and tape to fix these components to the wheelchair.
+=======
+## 3. Assembling the wheelchair
+By using two pieces of plywood and applying these to the inside of the wheels, a space is created to add the Raspberry Pi, Arduino Mega and a big powerbank. The feather and a small powerbank are attached to a spoke of the wheel to detect the rotation. Use cable ties and tape to fix these components to the wheelchair. The assembly of the wiring can be found [here](#6-Wiring) whereas an overview of the wheelchair with its components can be found here (#7-Poster).
+>>>>>>> b46d1f8887d4e471581ea15cb3a504a178a8cdac
 
 ## 3 Libraries
 The following libraries need to be installed in order to successfully run the code. In the code you can find the comments to what the code does and how it works.
@@ -88,7 +106,97 @@ This code needs to run on the Raspberry pi:
 
 ### 4.3. Code for Arduino Mega
 This code enabled Arduino Mega to receive signals from Raspberry Pi through its serial port and actuates 2 LED lights and the vibration motor.
+<<<<<<< HEAD
 
+=======
+```C
+#include <Adafruit_NeoPixel.h> // Necessary Library include
+
+#define LED_PIN1 2 // Defining the left LED
+#define LED_PIN2 7 // Defining the right LED
+#define VIB_PIN A10 // Defining Vibration Motor
+
+Adafruit_NeoPixel LED_controller1 = Adafruit_NeoPixel( 1, LED_PIN1, NEO_RGB + NEO_KHZ800);
+Adafruit_NeoPixel LED_controller2 = Adafruit_NeoPixel( 1, LED_PIN2, NEO_RGB + NEO_KHZ800);
+
+int i = 127;
+uint8_t R = 0, G = 0, B = 0; // Unsigned integer with 8 bits
+uint32_t counter = 0; // 32 bits unsigned integer, we only need 24 to go through all the colors
+
+bool left_red = false;
+bool right_red = false;
+
+void setup() {
+  Serial.begin(9600); //Set serial to 9600 baud
+  pinMode(VIB_PIN, OUTPUT);
+  LED_controller1.begin(); // We're starting up the library for the left LED
+  LED_controller2.begin(); // We're starting up the library for the right LED
+
+  LED_controller1.setPixelColor( 0, 0x008000);
+  LED_controller2.setPixelColor( 0, 0x008000);
+  // Red = 0xFF0000 and Green = 0x008000
+}
+
+void loop() {
+
+  LED_controller1.show(); // Sending updated pixel color to the hardware
+  LED_controller2.show(); // Sending updated pixel color to the hardware
+
+  if (Serial.available() > 0 ) {
+    int command = Serial.read();
+//  int inByte = Serial.read();
+
+    switch (command) {
+      // user needs to go forward
+      case '0' :
+        LED_controller1.setPixelColor( 0, 0x008000);
+        LED_controller2.setPixelColor( 0, 0x008000);
+        LED_controller1.show();
+        LED_controller2.show();
+        break;
+      //user needs to go backward
+      case '1' :
+        LED_controller1.setPixelColor( 0, 0xFF0000);
+        LED_controller2.setPixelColor( 0, 0xFF0000);
+        LED_controller1.show();
+        LED_controller2.show();
+        break;
+      //user needs to go right
+      case '2' :
+        LED_controller1.setPixelColor( 0, 0xFF0000);
+        LED_controller2.setPixelColor( 0, 0x008000);
+        LED_controller1.show();
+        LED_controller2.show();
+        break;
+      //user needs to go left
+      case '3' :
+        LED_controller1.setPixelColor( 0, 0x008000);
+        LED_controller2.setPixelColor( 0, 0xFF0000);
+        LED_controller1.show();
+        LED_controller2.show();
+        break;
+      //Vibrate the motor
+      case '4' :
+        analogWrite(VIB_PIN, 153);
+        delay(2000);
+        analogWrite(VIB_PIN, 0);
+        // Add a default state that makes sure the LED lights are shining white.
+      default:
+        LED_controller1.setPixelColor( 0, 0xFFFFFF);
+        LED_controller2.setPixelColor( 0, 0xFFFFFF);
+        LED_controller1.show();
+        LED_controller2.show();
+
+      }
+
+    }
+}
+```
+
+
+
+## 6 Wiring
+>>>>>>> b46d1f8887d4e471581ea15cb3a504a178a8cdac
 
 ## 5 Wiring
 Wiring Arduino uno, vibration motor and two RGB LEDs
