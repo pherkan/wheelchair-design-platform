@@ -103,7 +103,7 @@ Download Adafruit Neopixel library to control the LEDs.
 ```
 </p>
 </details>
-## 5 Code
+## 5 Code ##
 
 ### 5.1. Code for Raspberry Pi
 
